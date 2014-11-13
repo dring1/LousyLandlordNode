@@ -16,7 +16,7 @@ module.exports = {
     },
     organization: {
       type: 'string',
-      require: 'false'
+      required: 'false'
     },
     city: {
       required: true,
@@ -24,6 +24,10 @@ module.exports = {
     },
     province: {
       required: true,
+      type: 'string'
+    },
+    phoneNumber: {
+      required: false,
       type: 'string'
     }
   }

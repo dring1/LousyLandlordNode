@@ -1,4 +1,5 @@
 var LandlordController = require('../../../api/controllers/LandlordController'),
+  fixtures = require('../../fixtures'),
   request = require('supertest'),
   should = require('should'),
   Chance = require('chance'),
@@ -6,14 +7,7 @@ var LandlordController = require('../../../api/controllers/LandlordController'),
   util = require('util');
 
 describe('LandlordController', function() {
-  var url = "http://localhost:1337/";
-  var fixtures = {
-    landlord: {
-      name: chance.name(),
-      city: 'Ottawa',
-      province: 'Ontario'
-    }
-  };
+  var url = fixtures.url;
 
   it('should redirect create landlord', function(done) {
     request(url)
@@ -35,6 +29,19 @@ describe('LandlordController', function() {
       .end(function(err, res) {
         if (err) throw new Error(util.inspect(err));
         res.body.name.should.equal(fixtures.landlord.name);
+        done();
+      });
+  });
+
+  it('should query landlord', function(done) {
+    var query = '?where={city: \"' + fixtures.landlord.city + '\"}'
+    //var query = '?where={city: ottawa}'
+    request(url)
+      .get('landlord' + query)
+      .expect(200)
+      .end(function(err, res) {
+        if (err) throw new Error(util.inspect(err));
+        res.body[0].name.should.equal(fixtures.landlord.name);
         done();
       });
   });

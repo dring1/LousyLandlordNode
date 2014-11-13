@@ -49,10 +49,13 @@ module.exports.routes = {
   // Landlord routes
   'post /landlord': 'LandlordController.create',
   'get /landlord/:id?': 'LandlordController.find',
+  //'get /landlords': 'LandlordController.findAll',
   'put /landlord/:id?': 'LandlordController.update',
   'delete /landlord/:id?': 'LandlordController.destroy',
 
   // Property routes
   'post /property': 'PropertyController.create',
   'get /property/:id?': 'PropertyController.find'
+  //'get /properties': 'PropertyController.findAll'
+
 };
