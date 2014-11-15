@@ -14,27 +14,26 @@ module.exports = {
     var params = req.params.all();
     var landlord_id = params.owner_id;
 
-    async.seq(
-
-      function() {
+    async.series([
+      function(cb) {
         Landlord.findOne(landlord_id, function(err, landlord) {
-          if (landlord === undefined)
-            return res.json(404, {
-              message: 'Landlord not found, id: ' + landlord_id
-            });
-          if (err) return res.json(500, err);
-          return;
+          if (landlord === undefined) return res.json(404, {message: 'Landlord not found, id: ' + landlord_id });
+          if (err) return cb(err);
+          cb(null);
         });
-      }(),
-      function() {
+      },
+      function(cb) {
         Property.create(params, function(err, property) {
-          console.log(err);
-          if (err) return res.status(500).json({message: 'duplicate entry'});
-          res.status(201).json(property);
-          return;
+          if (err) return cb(err);
+          return res.status(201).json(property);
+          cb(null);
         });
-      }()
-    )
+      }
+    ], function(err) {
+      if (err){
+        return res.status(500).json({message: 'duplicate entry'});
+      }
+    });
   },
 
   update: function(req, res, next) {
@@ -70,13 +69,20 @@ module.exports = {
       Property.find(options, function(err, result) {
         if (result === undefined) return res.notFound();
         if (err) return next(err);
-        res.json(result);
+        res.status(200).json(result);
       });
     }
   },
 
   destroy: function(req, res, next) {
     // must be authenticated ?!?
-
+    console.log('called');
+    if (req.user) {
+      console.log('I can delete things');
+    } else {
+      res.status(403).json({
+        message: 'Not authenticated'
+      });
+    }
   }
 };

@@ -34,8 +34,8 @@ module.exports.passport = {
     protocol: 'oauth2',
     strategy: require('passport-github').Strategy,
     options: {
-      clientID: 'your-client-id',
-      clientSecret: 'your-client-secret'
+      clientID: process.env.LLL_CLIENT_ID,
+      clientSecret: process.env.LLL_CLIENT_SECRET
     }
   },
 

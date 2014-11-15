@@ -76,7 +76,7 @@ var AuthController = {
    * Render the registration page
    *
    * Just like the login form, the registration form is just simple HTML:
-   *
+   *`
       <form role="form" action="/auth/local/register" method="post">
         <input type="text" name="username" placeholder="Username">
         <input type="text" name="email" placeholder="Email">
@@ -160,9 +160,20 @@ var AuthController = {
         if (err) {
           return tryAgain();
         }
-
+        console.log(user);
         // Upon successful login, send the user to the homepage were req.user
         // will available.
+        // User.findOne(user.email, function(err, thisUser) {
+        //   if(err) return err;
+        //   if(!thisUser){
+        //     console.log('creating user');
+        //     User.create({email: user.email}, function(err, newUser) {
+        //       console.log('user created');
+        //       console.log(newUser);
+        //     });
+        //   }
+        // });
+        // check if user exists, if not create a user
         res.redirect('/');
       });
     });

@@ -5,7 +5,8 @@ var PropertyController = require('../../../api/controllers/PropertyController'),
   Chance = require('chance'),
   chance = new Chance(),
   util = require('util'),
-  async = require('async');
+  async = require('async'),
+  OAuth = require('oauth');
 
 describe('PropertyController', function() {
   var url = fixtures.url;
@@ -38,8 +39,8 @@ describe('PropertyController', function() {
           });
       }
     ], function(err) {
-      if (err) return new Error(util.inspect(err))
-      done();
+      if (err) throw new Error(util.inspect(err));
+      done(err);
     });
   });
 
@@ -61,7 +62,7 @@ describe('PropertyController', function() {
       .expect(200)
       .end(function(err, res) {
         if (err) throw new Error(util.inspect(err));
-        res.body[0].owner_id.should.equal(fixtures.landlord.id);
+        res.body[0].owner_id.should.equal(fixtures.property.owner_id);
         done();
       });
   });
@@ -70,7 +71,9 @@ describe('PropertyController', function() {
     var new_name = fixtures.landlord.name = chance.name();
     request(url)
       .put('landlord/' + fixtures.landlord.id)
-      .send({name: new_name})
+      .send({
+        name: new_name
+      })
       .expect(200)
       .end(function(err, res) {
         if (err) throw new Error(util.inspect(err));
@@ -79,9 +82,29 @@ describe('PropertyController', function() {
       });
   });
 
-  xit('should destroy a landlord by id', function(done) {
+  it('should destroy a landlord by id', function(done) {
+
+    //first authenicate
+    //
+    var OAuth2 = OAuth.OAuth2;
+    var githubConsumerKey = process.env.LLL_CLIENT_ID;
+    var githubConsumerSecret = process.env.LLL_CLIENT_SECRET;
+    var oauth2 = new OAuth2(githubConsumerKey,
+     githubConsumerSecret,
+     'https://api.github.com/users/',
+     null,
+     'oauth2/token',
+     null);
+    oauth2.getOAuthAccessToken(
+     '',
+     {'grant_type':'client_credentials'},
+     function (e, access_token, refresh_token, results){
+        console.log(access_token);
+        console.log(results);
+       done();
+     });
     request(url)
-      .del('landlord/'+ fixtures.landlord.id)
+      .del('property/' + fixtures.property.id)
       .send(fixtures.landlord.id)
       .expect(200)
       .end(function(err, res) {
