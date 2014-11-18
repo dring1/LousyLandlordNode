@@ -1,4 +1,4 @@
-// Generated on 2014-11-15 using generator-angular-fullstack 2.0.13
+// Generated on 2014-11-16 using generator-angular-fullstack 2.0.13
 'use strict';
 
 module.exports = function (grunt) {
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
     },
     express: {
       options: {
-        port: process.env.PORT || 9000
+        port:  9000
       },
       dev: {
         options: {
@@ -79,16 +79,6 @@ module.exports = function (grunt) {
           '<%= yeoman.client %>/{app,components}/**/*.mock.js'
         ],
         tasks: ['newer:jshint:all', 'karma']
-      },
-      injectSass: {
-        files: [
-          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
-        tasks: ['injector:sass']
-      },
-      sass: {
-        files: [
-          '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}'],
-        tasks: ['sass', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -188,7 +178,8 @@ module.exports = function (grunt) {
     'node-inspector': {
       custom: {
         options: {
-          'web-host': 'localhost'
+          'web-host': 'localhost',
+          'debug-port': 5859
         }
       }
     },
@@ -200,7 +191,7 @@ module.exports = function (grunt) {
         options: {
           nodeArgs: ['--debug-brk'],
           env: {
-            PORT: process.env.PORT || 9000
+            PORT:  9000
           },
           callback: function (nodemon) {
             nodemon.on('log', function (event) {
@@ -223,7 +214,7 @@ module.exports = function (grunt) {
       target: {
         src: '<%= yeoman.client %>/index.html',
         ignorePath: '<%= yeoman.client %>/',
-        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/', /bootstrap.css/, /font-awesome.css/ ]
+        exclude: [/bootstrap-sass-official/, /bootstrap.js/, '/json3/', '/es5-shim/']
       }
     },
 
@@ -404,10 +395,8 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       server: [
-        'sass',
       ],
       test: [
-        'sass',
       ],
       debug: {
         tasks: [
@@ -419,7 +408,6 @@ module.exports = function (grunt) {
         }
       },
       dist: [
-        'sass',
         'imagemin',
         'svgmin'
       ]
@@ -463,23 +451,6 @@ module.exports = function (grunt) {
       all: localConfig
     },
 
-    // Compiles Sass to CSS
-    sass: {
-      server: {
-        options: {
-          loadPath: [
-            '<%= yeoman.client %>/bower_components',
-            '<%= yeoman.client %>/app',
-            '<%= yeoman.client %>/components'
-          ],
-          compass: false
-        },
-        files: {
-          '.tmp/app/app.css' : '<%= yeoman.client %>/app/app.scss'
-        }
-      }
-    },
-
     injector: {
       options: {
 
@@ -502,25 +473,6 @@ module.exports = function (grunt) {
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.spec.js',
                '!{.tmp,<%= yeoman.client %>}/{app,components}/**/*.mock.js']
             ]
-        }
-      },
-
-      // Inject component scss into app.scss
-      sass: {
-        options: {
-          transform: function(filePath) {
-            filePath = filePath.replace('/client/app/', '');
-            filePath = filePath.replace('/client/components/', '');
-            return '@import \'' + filePath + '\';';
-          },
-          starttag: '// injector',
-          endtag: '// endinjector'
-        },
-        files: {
-          '<%= yeoman.client %>/app/app.scss': [
-            '<%= yeoman.client %>/{app,components}/**/*.{scss,sass}',
-            '!<%= yeoman.client %>/app/app.{scss,sass}'
-          ]
         }
       },
 
@@ -569,7 +521,6 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
         'concurrent:server',
         'injector',
         'wiredep',
@@ -581,7 +532,6 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       'env:all',
-      'injector:sass', 
       'concurrent:server',
       'injector',
       'wiredep',
@@ -611,7 +561,6 @@ module.exports = function (grunt) {
       return grunt.task.run([
         'clean:server',
         'env:all',
-        'injector:sass', 
         'concurrent:test',
         'injector',
         'autoprefixer',
@@ -624,7 +573,6 @@ module.exports = function (grunt) {
         'clean:server',
         'env:all',
         'env:test',
-        'injector:sass', 
         'concurrent:test',
         'injector',
         'wiredep',
@@ -642,7 +590,6 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'injector:sass', 
     'concurrent:dist',
     'injector',
     'wiredep',
