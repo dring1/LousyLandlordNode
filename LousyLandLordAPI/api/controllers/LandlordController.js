@@ -9,9 +9,10 @@
 module.exports = {
   create: function(req, res, next) {
     var params = req.params.all();
-
+    console.log('landlord created');
     Landlord.create(params, function(err, result) {
       if (err) return res.badRequest('Landlord already exists');
+      console.log(result);
       return res.json(201, result);
     });
   },
@@ -41,7 +42,7 @@ module.exports = {
       Landlord.find(options, function(err, result) {
         if (result === undefined) return res.notFound();
         if (err) return next(err);
-        res.json(result);
+        res.status(200).json(result);
       });
     }
   },

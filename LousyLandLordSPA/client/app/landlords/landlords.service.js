@@ -1,19 +1,29 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('landlords', function ($http) {
+  .factory('landlords', function($http, config, Restangular) {
     // Service logic
     // ...
-    $http.get('http://localhost:9104/landlord')
-    .success(function(landlords) {
-      console.log(landlords);
-    });
-    var meaningOfLife = 42;
+
+
+    function getLandlord (id) {
+
+    }
+
+    function getLandlords () {
+      $http.get(config.getBaseURL() + 'landlord')
+      .success(function(landlords) {
+        console.log('Landlords', landlords);
+      })
+      .catch(function(err) {
+        console.log('error landlordsSerive', err);
+      });
+
+    }
 
     // Public API here
     return {
-      someMethod: function () {
-        return meaningOfLife;
-      }
+      getLandlord: getLandlord,
+      getLandlords: getLandlords
     };
   });

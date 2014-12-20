@@ -29,6 +29,7 @@ module.exports = {
   },
 
   beforeCreate: function(values, cb) {
+    if(values.longitude && values.latitude) cb();
     var address = [values.location.address, values.location.city,
       values.location.province, values.location.country, values.location.postalCode
     ].join(', ');

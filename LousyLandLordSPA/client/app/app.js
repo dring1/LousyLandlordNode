@@ -6,11 +6,12 @@ angular.module('lousyLandLordSpaApp', [
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
-  'google-maps'.ns(),
+  'uiGmapgoogle-maps',
+  'google.places',
   'restangular'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
-    RestangularProvider.setBaseUrl('http://localhost:9015/');
+    RestangularProvider.setBaseUrl('http://localhost:9015/api');
     $urlRouterProvider
       .otherwise('/');
 

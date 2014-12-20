@@ -10,10 +10,10 @@ angular.module('lousyLandLordSpaApp')
 
         id: 'pepepw',
         idKey: 'qweqe',
-        titile: 'asdada', 
+        titile: 'asdada',
         latitude: 45.4248,
         longitude: -75.6992
-      
+
     }
     ];
 
