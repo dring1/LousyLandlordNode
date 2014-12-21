@@ -1,0 +1,31 @@
+.address-search-frame {
+  /*position: absolute;
+  top: 50px;
+  left: 120px;
+  z-index: 3000;*/
+}
+
+.address-search-frame > input {
+  font-family: Arial;
+  font-size: 14px;
+  color: #777 !important;
+  width: 300px;
+  padding: 6px;
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+  border-radius: 4px;
+  border: 1px solid #C1C1C1;
+  height: 34px;
+}
+
+.form-frame{
+  margin-left: 10px;
+}
+
+.toolbar{
+  display: inline-flex;
+  position: absolute;
+  top: 25px;
+  left: 100px;
+  z-index: 3000;
+}

@@ -9,7 +9,7 @@ angular.module('lousyLandLordSpaApp')
     function getLandlord (id) {
 
     }
-
+1
     function getLandlords () {
       $http.get(config.getBaseURL() + 'landlord')
       .success(function(landlords) {

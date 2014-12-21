@@ -1,0 +1,6 @@
+<div ng-controller="FormCtrl">
+  <button  class="btn btn-success" ng-show="!activeForm" ng-click="newForm()">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  </button>
+  <form class="form-input" ng-show="activeForm" sf-schema="schema" sf-form="form" sf-model="model"></form>
+</div>

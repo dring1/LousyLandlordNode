@@ -8,12 +8,13 @@ angular.module('lousyLandLordSpaApp', [
   'ui.bootstrap',
   'uiGmapgoogle-maps',
   'google.places',
+  'schemaForm',
   'restangular'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
     RestangularProvider.setBaseUrl('http://localhost:9015/api');
     $urlRouterProvider
-      .otherwise('/');
+      .otherwise('/home');
 
     $locationProvider.html5Mode(true);
   });
