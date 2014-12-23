@@ -1,6 +1,8 @@
 <div ng-controller="FormCtrl">
-  <button  class="btn btn-success" ng-show="!activeForm" ng-click="newForm()">
-    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <button  class="btn btn-success show-form-btn"  ng-click="toggleForm()">
+    <span ng-show="!activeForm" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <span ng-show="activeForm" class="glyphicon glyphicon-minus" aria-hidden="true"></span>
   </button>
-  <form class="form-input" ng-show="activeForm" sf-schema="schema" sf-form="form" sf-model="model"></form>
+  <br/><br/>
+  <form class="form-input pull-left" ng-show="activeForm" sf-schema="schema" sf-form="form" sf-model="model"></form>
 </div>

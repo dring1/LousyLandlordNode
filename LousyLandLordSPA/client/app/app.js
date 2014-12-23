@@ -9,6 +9,7 @@ angular.module('lousyLandLordSpaApp', [
   'uiGmapgoogle-maps',
   'google.places',
   'schemaForm',
+  'stripe',
   'restangular'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {

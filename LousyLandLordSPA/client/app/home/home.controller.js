@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('HomeCtrl', function ($scope, landlords) {
+  .controller('HomeCtrl', function ($scope) {
     $scope.message = 'Hello';
 
 

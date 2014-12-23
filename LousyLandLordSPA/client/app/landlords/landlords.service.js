@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('landlords', function($http, config, Restangular) {
+  .factory('landlordService', function($http, config, Restangular) {
     // Service logic
     // ...
 
@@ -9,7 +9,7 @@ angular.module('lousyLandLordSpaApp')
     function getLandlord (id) {
 
     }
-1
+
     function getLandlords () {
       $http.get(config.getBaseURL() + 'landlord')
       .success(function(landlords) {

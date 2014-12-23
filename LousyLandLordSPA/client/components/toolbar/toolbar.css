@@ -1,8 +1,5 @@
 .address-search-frame {
-  /*position: absolute;
-  top: 50px;
-  left: 120px;
-  z-index: 3000;*/
+height: 35px;
 }
 
 .address-search-frame > input {
@@ -19,7 +16,7 @@
 }
 
 .form-frame{
-  margin-left: 10px;
+
 }
 
 .toolbar{

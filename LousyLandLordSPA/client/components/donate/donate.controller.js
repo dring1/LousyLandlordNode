@@ -3,5 +3,4 @@
 angular.module('lousyLandLordSpaApp')
 .controller('DonateCtrl', function ($scope) {
 
-
 });

@@ -1,16 +1,16 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('MapCtrl', function($scope, uiGmapGoogleMapApi) {
+  .controller('MapCtrl', function($rootScope, $scope, uiGmapGoogleMapApi, landlordService) {
 
     var googleMaps;
 
     $scope.cities = [
     {
 
-        id: 'pepepw',
-        idKey: 'qweqe',
-        titile: 'asdada',
+        id: 'TESTID',
+        idKey: 'LANDLORD',
+        title: 'I am a shitty landlord',
         latitude: 45.4248,
         longitude: -75.6992
 
@@ -72,6 +72,16 @@ angular.module('lousyLandLordSpaApp')
     };
 
     $scope.showWeather = false;
+
+    $scope.markersEvents = {
+      click: function (gMarker, eventName, model) {
+        console.log(model);
+        if(model.$id){
+          model = model.coords;//use scope portion then
+        }
+        $rootScope.$broadcast('landlord:select', model);
+      }
+    };
 
     uiGmapGoogleMapApi.then(function(maps) {
       googleMaps = maps;
