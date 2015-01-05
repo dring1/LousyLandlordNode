@@ -47,6 +47,22 @@ module.exports = {
     }
   },
 
+  findAll: function(req, res, next) {
+    var options = {
+      limit: req.param('limit') || undefined,
+      skip: req.param('skip') || undefined,
+      sort: req.param('sort') || undefined,
+      where: req.param('where') || undefined
+    };
+    console.log("This is the options", options);
+    Landlord.find(options, function(err, result) {
+      if (result === undefined) return res.notFound();
+      if (err) return next(err);
+      console.log(result);
+      res.status(200).json(result);
+    });
+  },
+
   update: function(req, res, next) {
     var criteria = {};
     criteria = _.merge({}, req.params.all(), req.body);
@@ -69,7 +85,7 @@ module.exports = {
       if (!result) return res.notFound();
       Landlord.destroy(id, function(err) {
         if (err) return next(err);
-        res.json(200, result);
+        res.status(200).json(result);
       });
     });
   }

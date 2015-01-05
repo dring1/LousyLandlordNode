@@ -74,6 +74,37 @@ module.exports = {
     }
   },
 
+  findAll: function(req, res, next) {
+    // var where = req.param('where');
+    var options = {
+      limit: req.param('limit') || undefined,
+      skip: req.param('skip') || undefined,
+      sort: req.param('sort') || undefined,
+      where: req.param('where') || undefined
+      //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
+    };
+    Property.find(options, function(err, result) {
+      if (result === undefined) return res.notFound();
+      if (err) return next(err);
+      // console.log('properties result', result);
+      res.status(200).json(result);
+    });
+  },
+
+  search: function(req, res, next){
+    var options = {
+      where: req.body.where || undefined
+      //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
+    };
+    console.log('property find all\n options: ', options);
+    Property.find(options, function(err, result) {
+      if (result === undefined) return res.notFound();
+      if (err) return next(err);
+      // console.log('properties result', result);
+      res.status(200).json(result);
+    });
+  },
+
   destroy: function(req, res, next) {
     // must be authenticated ?!?
     console.log('called');

@@ -1,0 +1,19 @@
+.info-frame{
+  position: absolute;
+  right: 10px;
+  top: 50px;
+  width:500px;
+  height: 500px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+
+.info{
+  overflow-x: hidden;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+.info-frame::-webkit-scrollbar { width: 0 !important }

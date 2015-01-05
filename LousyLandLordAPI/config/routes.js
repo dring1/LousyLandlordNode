@@ -33,7 +33,7 @@ module.exports.routes = {
    ***************************************************************************/
 
   '/': function(req, res, next) {
-    res.json('Welcome to the lousylandlord api');
+    res.json('Welcome to the lousylandlord api - We offer no HTML rendering of the API');
   },
 
   /***************************************************************************
@@ -49,13 +49,15 @@ module.exports.routes = {
   // Landlord routes
   'post /landlord': 'LandlordController.create',
   'get /landlord/:id?': 'LandlordController.find',
-  //'get /landlords': 'LandlordController.findAll',
+  'get /landlords': 'LandlordController.findAll',
   'put /landlord/:id?': 'LandlordController.update',
   'delete /landlord/:id?': 'LandlordController.destroy',
 
   // Property routes
   'post /property': 'PropertyController.create',
   'get /property/:id?': 'PropertyController.find',
+  'post /properties/search': 'PropertyController.search',
+  'get /properties': 'PropertyController.findAll',
   'delete /property/:id?': 'PropertyController.destroy',
   //
   'get /login': 'AuthController.login',

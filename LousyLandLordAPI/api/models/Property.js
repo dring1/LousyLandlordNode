@@ -14,9 +14,9 @@ module.exports = {
       type: 'object',
       unique: true
     },
-    comments: {
+    comment: {
       required: false,
-      type: 'array'
+      type: 'string'
     },
     longitude: {
       required: false,

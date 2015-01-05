@@ -45,34 +45,40 @@ angular.module('lousyLandLordSpaApp')
 
     // style inline for buttons
     $scope.form = [
-    'name',
-    'address',
-    'postal',
-    'unit',
-      {
+      'name',
+      'address',
+      'postal',
+      'unit', {
         'key': 'comment',
         'type': 'textarea',
         'placeholder': 'Make a comment'
       }, {
-        type: 'button',
-        title: 'Submit',
-        onClick: 'submit()',
-        style: 'ctrl-btn btn btn-success'
-      }, {
-        type: 'button',
-        title: 'Confirm',
-        style: 'ctrl-btn btn btn-warning'
-      }, {
-        type: 'button',
-        title: 'Cancel',
-        style: 'ctrl-btn btn btn-danger'
+        type: 'actions',
+        items: [{
+          type: 'submit',
+          style: 'btn-success ctrl-btn',
+          title: 'Submit',
+          onClick: ''
+        }, {
+          type: 'button',
+          style: 'btn-info',
+          title: 'Cancel',
+          onClick: 'cancel()'
+        }]
       }
-
     ];
 
     $scope.model = {};
     $scope.toggleForm = function() {
       $scope.activeForm = !$scope.activeForm;
+    };
+
+    $scope.cancel = function() {
+      // body...
+    };
+
+    $scope.submit = function() {
+      // body...
     };
 
 

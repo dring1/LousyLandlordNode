@@ -16,12 +16,13 @@ angular.module('lousyLandLordSpaApp')
 
   $scope.$watch('place', function(place) {
     if(!place) { return; }
-    console.log('place',place);
     if(!place.geometry) { return; }
-    var lat = parseFloat(place.geometry.location.k),
-    lng = parseFloat(place.geometry.location.D)
+    var loc = {
+      lat: parseFloat(place.geometry.location.k),
+      lng: parseFloat(place.geometry.location.D)
+    };
     // zoom to location
-
+    $rootScope.$broadcast('map:zoom', loc);
   });
 
 });

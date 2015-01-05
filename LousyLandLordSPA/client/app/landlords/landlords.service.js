@@ -1,27 +1,31 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('landlordService', function($http, config, Restangular) {
+  .factory('landlordService', function($http, $q, config) {
     // Service logic
     // ...
 
 
-    function getLandlord (id) {
-
+    function getLandlords() {
+      $http.get(config.getBaseURL() + 'landlords')
+        .then(function(landlords) {
+          console.log(landlords);
+        });
     }
 
-    function getLandlords () {
-      $http.get(config.getBaseURL() + 'landlord')
-      .success(function(landlords) {
-        console.log('Landlords', landlords);
-      })
-      .catch(function(err) {
-        console.log('error landlordsSerive', err);
-      });
-
+    function getLandlord(id) {
+      var deferred = $q.defer();
+      $http.get(config.getBaseURL() + 'landlord/' + id)
+        .then(function(landlord) {
+          console.log('Landlords', landlord);
+          deferred.resolve(landlord);
+        })
+        .catch(function(err) {
+          console.log('error landlordsSerive', err);
+        });
+      return deferred.promise;
     }
 
-    // Public API here
     return {
       getLandlord: getLandlord,
       getLandlords: getLandlords

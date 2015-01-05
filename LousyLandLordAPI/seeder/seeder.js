@@ -31,7 +31,7 @@ async.series([
 
     landlords.forEach(function(landlord) {
       var options = {
-        url: 'http://localhost:' + 9104 + '/landlord',
+        url: 'http://localhost:' + 9015 + '/landlord',
         method: 'post',
         json: true,
         body: landlord
@@ -58,6 +58,7 @@ async.series([
           country: 'Canada',
           postalCode: chance.postal()
         },
+        comment: chance.sentence(),
         longitude: chance.longitude(),
         latitude: chance.latitude()
       }
@@ -67,7 +68,7 @@ async.series([
 
     properties.forEach(function(property) {
       var options = {
-        url: 'http://localhost:' + 9104 + '/property',
+        url: 'http://localhost:' + 9015 + '/property',
         method: 'post',
         json: true,
         body: property

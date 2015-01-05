@@ -3,6 +3,7 @@
 angular.module('lousyLandLordSpaApp', [
   'ngCookies',
   'ngResource',
+  'ui.select',
   'ngSanitize',
   'ui.router',
   'ui.bootstrap',
@@ -10,10 +11,11 @@ angular.module('lousyLandLordSpaApp', [
   'google.places',
   'schemaForm',
   'stripe',
+  'angularModalService',
   'restangular'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, RestangularProvider) {
-    RestangularProvider.setBaseUrl('http://localhost:9015/api');
+    RestangularProvider.setBaseUrl('http://localhost:9015');
     $urlRouterProvider
       .otherwise('/home');
 

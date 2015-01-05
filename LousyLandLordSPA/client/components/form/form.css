@@ -5,11 +5,7 @@
   position: absolute;
   top: 50px;
   left: 0px;
-  -moz-border-radius: 15px;
-  border-radius: 4px;
-  background-color: rgba(227, 208, 196, 0.82);
-  padding-left: 12px !important;
-  padding-right: 12px !important;
+
 }
 
 .show-form-btn{
@@ -18,6 +14,6 @@
 }
 
 .ctrl-btn{
-  /*width: 50px;*/
-  /*display: inline-flex;*/
+  
+  margin-bottom: 20px;
 }

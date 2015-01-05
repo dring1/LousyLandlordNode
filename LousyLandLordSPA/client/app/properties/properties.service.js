@@ -1,22 +1,49 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('properties', function($http, config) {
-    // Service logic
-    // ...
+  .factory('propertyService', function($http, $q, config) {
 
-    $http.get(config.getBaseURL() + 'property')
-      .success(function(properties) {
-        console.log('Properties', properties);
-      })
-      .catch(function(err) {
-        console.log('error landlordsSerive', err);
-      });
+    function getProperties(where) {
+      var deferred = $q.defer();
+      $http.get(config.getBaseURL() + 'properties', {
+          params: {
+            skip: 0,
+            limit: 100,
+            where: where || undefined
+          }
+        })
+        .then(function(properties) {
+          //console.log(properties);
+          deferred.resolve(properties.data);
+        });
+      return deferred.promise;
+    }
 
-    // Public API here
+    function getProperty(id) {
+      var deferred = $q.defer();
+      $http.get(config.getBaseURL() + 'property/' + id)
+        .then(function(property) {
+          console.log(property);
+          deferred.resolve(property.data);
+        });
+      return deferred.promise;
+    }
+
+    function searchProperties(query) {
+      var deferred = $q.defer();
+      $http.post(config.getBaseURL() + 'properties/search', {
+          where: query
+        })
+        .then(function(property) {
+          console.log(property);
+          deferred.resolve(property.data);
+        });
+      return deferred.promise;
+    }
+
     return {
-      someMethod: function() {
-        return meaningOfLife;
-      }
+      getProperties: getProperties,
+      getProperty: getProperty,
+      searchProperties: searchProperties
     };
   });

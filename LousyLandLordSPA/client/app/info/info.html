@@ -1,3 +1,65 @@
 <div ng-controller="InfoCtrl">
-    
+  <div ng-show="propertyPanel" class="panel content">
+    <div class="row">
+      <h3 class="col-md-12">Property</h3>
+    </div>
+    <div class="row">
+      <div class="col-md-3">Landlord:</div>
+      <div class="col-md-9"><a href="#" class="pull-left" ng-click="showLandlord(landlord)">{{landlord.name}}</a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">Address:</div>
+      <div class="col-md-9">{{property.location.address}}, {{property.location.city}}, {{property.location.province}}</div>
+    </div>
+    <!-- <div class="row">
+      <div class="col-md-3">Location:</div>
+      <div class="col-md-4">Lat: {{entity.latitude | number:2}}</div>
+      <div class="col-md-5">Long: {{entity.longitude | number:2}}</div>
+    </div> -->
+    <div class="row">
+      <div class="col-md-12">Comment:</div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12 pull-right">{{property.comment}}</div>
+    </div>
+  </div>
+  <div ng-show="landlordPanel" class="panel">
+    <div class="info">
+      <div class="row">
+        <h3 class="col-md-12">Landlord</h3>
+      </div>
+      <div class="row">
+        <div class="col-md-3">Name:</div>
+        <div class="col-md-9">
+          {{landlord.name}}
+        </div>
+      </div>
+      <div ng-if="landlord.comments.length > 0">
+
+        Comments:
+        <ul>
+          <!-- <li ng-repeat="comment in landlord.comments">
+          {{comment | limitTo: 140}}
+        </li> -->
+          <li> {{landlord.comments[0]}} <a ng-click="showComments()"> Show More </a></li>
+        </ul>
+      </div>
+        <!-- same thing for properties show all options -->
+      <div ng-if="landlord.properties.length > 0">
+        Properties
+        <ul>
+          <!-- <li ng-repeat="property in landlord.properties">
+            {{property.location}}
+          </li> -->
+          <li> {{landlord.properties[0].location}} <a ng-click="showComments()"> Show More </a></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
 </div>
