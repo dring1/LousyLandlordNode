@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('FormCtrl', function($scope) {
+  .controller('FormCtrl', function($scope, landlordService) {
 
     $scope.activeForm = false;
 
@@ -30,7 +30,7 @@ angular.module('lousyLandLordSpaApp')
         unit: {
           type: 'string',
           title: 'Unit | Apt',
-          minLength: 6,
+          minLength: 1,
           maxLength: 6
         },
         comment: {
@@ -58,7 +58,7 @@ angular.module('lousyLandLordSpaApp')
           type: 'submit',
           style: 'btn-success ctrl-btn',
           title: 'Submit',
-          onClick: ''
+          onClick: 'submit()'
         }, {
           type: 'button',
           style: 'btn-info',
@@ -68,17 +68,17 @@ angular.module('lousyLandLordSpaApp')
       }
     ];
 
-    $scope.model = {};
+    $scope.newLandlord = {};
     $scope.toggleForm = function() {
       $scope.activeForm = !$scope.activeForm;
     };
 
     $scope.cancel = function() {
-      // body...
+      console.log($scope.newLandlord);
     };
 
     $scope.submit = function() {
-      // body...
+      console.log($scope.newLandlord);
     };
 
 

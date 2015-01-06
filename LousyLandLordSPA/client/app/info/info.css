@@ -3,7 +3,7 @@
   right: 10px;
   top: 50px;
   width:500px;
-  height: 500px;
+  max-height: 500px;
   overflow-x: hidden;
   overflow-y: auto;
   word-wrap: break-word;
@@ -17,3 +17,9 @@
 }
 
 .info-frame::-webkit-scrollbar { width: 0 !important }
+
+
+.btn-close{
+  position: absolute;
+  right: 5px;
+}

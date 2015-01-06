@@ -37,6 +37,8 @@ angular.module('lousyLandLordSpaApp')
   function closePanels() {
     $scope.propertyPanel = false;
     $scope.landlordPanel = false;
+    $scope.showAllComments = false;
+    $scope.showAllProperties = false;
   }
 
   $scope.closePanels =  closePanels;
@@ -51,6 +53,16 @@ angular.module('lousyLandLordSpaApp')
   $scope.showProperty = function(property) {
     closePanels();
     $scope.$broadcast('property:select', property);
+  };
 
-  }
+  $scope.showAllComments = false;
+  $scope.showAllProperties = false;
+
+  $scope.showComments = function() {
+    $scope.showAllComments = true;
+  };
+
+  $scope.showProperties = function() {
+    $scope.showAllProperties = true;
+  };
 });
