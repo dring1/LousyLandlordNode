@@ -41,9 +41,23 @@ angular.module('lousyLandLordSpaApp')
       return deferred.promise;
     }
 
+    function submitProperty(property){
+      var deferred = $q.defer();
+      $http.post(config.getBaseURL() + 'property', {property: property})
+      .then(function(property) {
+        console.log(property);
+        deferred.resolve(property.data);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      })
+      return deferred.promise;
+    }
+
     return {
       getProperties: getProperties,
       getProperty: getProperty,
-      searchProperties: searchProperties
+      searchProperties: searchProperties,
+      submitProperty: submitProperty
     };
   });

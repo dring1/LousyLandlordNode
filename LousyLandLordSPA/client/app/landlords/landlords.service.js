@@ -26,6 +26,10 @@ angular.module('lousyLandLordSpaApp')
       return deferred.promise;
     }
 
+    function submitLandlord(landlord){
+      
+    }
+
     return {
       getLandlord: getLandlord,
       getLandlords: getLandlords

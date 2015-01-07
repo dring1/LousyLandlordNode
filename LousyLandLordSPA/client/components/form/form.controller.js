@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('FormCtrl', function($scope, landlordService) {
+  .controller('FormCtrl', function($scope, landlordService, propertyService) {
 
     $scope.activeForm = false;
 
@@ -12,7 +12,8 @@ angular.module('lousyLandLordSpaApp')
           type: 'string',
           minLength: 2,
           title: 'Name',
-          placeholder: 'John Smith'
+          placeholder: 'John Smith',
+          required: true
         },
         address: {
           type: 'string',
@@ -39,7 +40,13 @@ angular.module('lousyLandLordSpaApp')
           minLength: 6,
           maxLength: 140
         }
-      }
+      },
+      required: [
+      'name',
+      'address',
+      'postal',
+      'unit'
+      ]
     };
 
 
@@ -55,7 +62,7 @@ angular.module('lousyLandLordSpaApp')
       }, {
         type: 'actions',
         items: [{
-          type: 'submit',
+          type: 'button',
           style: 'btn-success ctrl-btn',
           title: 'Submit',
           onClick: 'submit()'
@@ -78,8 +85,17 @@ angular.module('lousyLandLordSpaApp')
     };
 
     $scope.submit = function() {
+      $scope.$broadcast('schemaFormValidate');
       console.log($scope.newLandlord);
+      propertyService.submitProperty($scope.newLandlord)
+      .then(function(landlord) {
+        // body...
+      })
+      .catch(function(err) {
+        console.log('err', err);
+        $scope.error = true;
+      });
     };
 
-
+    $scope.error = false;
   });
