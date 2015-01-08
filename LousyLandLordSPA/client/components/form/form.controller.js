@@ -8,31 +8,57 @@ angular.module('lousyLandLordSpaApp')
     $scope.schema = {
       type: 'object',
       properties: {
+        location: {
+          type: 'object',
+          properties: {
+            address: {
+              type: 'string',
+              title: 'Street',
+              minLength: 2,
+              placeholder: '123 Fake St'
+            },
+            unit: {
+              type: 'string',
+              title: 'Unit | Apt',
+              minLength: 1,
+              maxLength: 6
+            },
+            city: {
+              type: 'string',
+              title: 'City',
+              minLength: 3,
+              maxLength: 60,
+              required: true
+            },
+            province: {
+              type: 'string',
+              title: 'Province',
+              minLength: 2,
+              maxLength: 60,
+              required: true
+            },
+            postal: {
+              type: 'string',
+              title: 'Postal Code',
+              minLength: 6,
+              maxLength: 6,
+              placeholder: 'K1S3T8(No space)'
+            }
+          },
+          required: ['address', 'unit', 'city', 'province', 'postal']
+        },
         name: {
           type: 'string',
           minLength: 2,
-          title: 'Name',
-          placeholder: 'John Smith',
+          maxLength: 120,
+          title: 'Landlord Name',
           required: true
         },
-        address: {
+        organization: {
           type: 'string',
-          title: 'Street',
           minLength: 2,
-          placeholder: '123 Fake St'
-        },
-        postal: {
-          type: 'string',
-          title: 'Postal Code',
-          minLength: 6,
-          maxLength: 6,
-          placeholder: 'K1S3T8(No space)'
-        },
-        unit: {
-          type: 'string',
-          title: 'Unit | Apt',
-          minLength: 1,
-          maxLength: 6
+          maxLength: 150,
+          title: 'Organization'
         },
         comment: {
           type: 'string',
@@ -43,9 +69,7 @@ angular.module('lousyLandLordSpaApp')
       },
       required: [
       'name',
-      'address',
-      'postal',
-      'unit'
+      'location'
       ]
     };
 
@@ -53,9 +77,8 @@ angular.module('lousyLandLordSpaApp')
     // style inline for buttons
     $scope.form = [
       'name',
-      'address',
-      'postal',
-      'unit', {
+      'location',
+      'organization',{
         'key': 'comment',
         'type': 'textarea',
         'placeholder': 'Make a comment'

@@ -13,25 +13,54 @@ module.exports = {
   create: function(req, res, next) {
     var params = req.params.all();
     var landlord_id = params.owner_id;
-
     async.series([
       function(cb) {
-        Landlord.findOne(landlord_id, function(err, landlord) {
-          if (landlord === undefined) return res.json(404, {message: 'Landlord not found, id: ' + landlord_id });
-          if (err) return cb(err);
-          cb(null);
-        });
+        console.log('property create params', params);
+        // if no id search by name
+        if (params.property.owner_id) {
+          Landlord.findOne(landlord_id, function(err, landlord) {
+            if (err) return cb(err);
+            landlord_id = landlord.id;
+            cb(null);
+          });
+        } else if (params.property.name === 1) {
+          Landlord.findByName(params.property.name, function(err, landlord) {
+            console.log(landlord);
+            landlord_id = landlord.id;
+            cb(null);
+          });
+        } else {
+          var newLandlord = {
+            name: params.property.name,
+            organization: params.property.organization,
+            city: params.property.city,
+            province: params.property.province
+          };
+          Landlord.create(newLandlord, function(err, landlord) {
+            if (err) return cb(err);
+            landlord_id = landlord.id;
+
+            console.log('new landlord', landlord);
+            cb(null);
+          });
+        }
       },
       function(cb) {
-        Property.create(params, function(err, property) {
+        params.property.owner_id = landlord_id;
+        console.log(params);
+        Property.create(params.property, function(err, property) {
           if (err) return cb(err);
-          return res.status(201).json(property);
+          landlord_id = landlord.id;
+          //return res.status(201).json(property);
           cb(null);
         });
       }
     ], function(err) {
-      if (err){
-        return res.status(500).json({message: 'duplicate entry'});
+      if (err) {
+        console.log(err);
+        return res.status(500).json({
+          message: 'duplicate entry'
+        });
       }
     });
   },
@@ -81,7 +110,7 @@ module.exports = {
       skip: req.param('skip') || undefined,
       sort: req.param('sort') || undefined,
       where: req.param('where') || undefined
-      //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
+        //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
     };
     Property.find(options, function(err, result) {
       if (result === undefined) return res.notFound();
@@ -91,10 +120,10 @@ module.exports = {
     });
   },
 
-  search: function(req, res, next){
+  search: function(req, res, next) {
     var options = {
       where: req.body.where || undefined
-      //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
+        //where: {owner_id: '54a4ab12b32e396db7930a73'}//req.param('where') || undefined
     };
     console.log('property find all\n options: ', options);
     Property.find(options, function(err, result) {

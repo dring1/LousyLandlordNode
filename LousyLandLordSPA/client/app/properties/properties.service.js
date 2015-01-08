@@ -50,7 +50,7 @@ angular.module('lousyLandLordSpaApp')
       })
       .catch(function(err) {
         deferred.reject(err);
-      })
+      });
       return deferred.promise;
     }
 

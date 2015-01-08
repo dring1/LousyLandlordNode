@@ -56,9 +56,9 @@ module.exports.routes = {
   // Property routes
   'post /property': 'PropertyController.create',
   'get /property/:id?': 'PropertyController.find',
+  'delete /property/:id?': 'PropertyController.destroy',
   'post /properties/search': 'PropertyController.search',
   'get /properties': 'PropertyController.findAll',
-  'delete /property/:id?': 'PropertyController.destroy',
   //
   'get /login': 'AuthController.login',
   'get /logout': 'AuthController.logout',

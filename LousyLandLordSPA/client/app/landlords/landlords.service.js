@@ -27,11 +27,21 @@ angular.module('lousyLandLordSpaApp')
     }
 
     function submitLandlord(landlord){
-      
+      var deferred = $q.defer();
+      $http.post(config.getBaseURL() + 'landlord', {landlord: landlord})
+      .then(function(result) {
+        console.log(result);
+        deferred.resolve(result);
+      })
+      .catch(function(err) {
+        deferred.reject(err);
+      });
+      return deferred.promise;
     }
 
     return {
       getLandlord: getLandlord,
-      getLandlords: getLandlords
+      getLandlords: getLandlords,
+      submitLandlord: submitLandlord
     };
   });

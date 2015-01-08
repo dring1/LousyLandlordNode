@@ -10,6 +10,7 @@ module.exports = {
     },
     location: {
       //turn into relationship me tinks?
+      // nested fields
       required: true,
       type: 'object',
       unique: true
