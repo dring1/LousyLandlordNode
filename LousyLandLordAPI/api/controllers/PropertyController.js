@@ -15,43 +15,54 @@ module.exports = {
     var landlord_id = params.owner_id;
     async.series([
       function(cb) {
-        console.log('property create params', params);
+
         // if no id search by name
+        console.log(params);
+        // if(params.property.owner_id === undefined || params.property.name === undefined){
+        //   return res.status(404).json('No landlord name or owner_id present');
+        // }
         if (params.property.owner_id) {
           Landlord.findOne(landlord_id, function(err, landlord) {
             if (err) return cb(err);
             landlord_id = landlord.id;
             cb(null);
           });
-        } else if (params.property.name === 1) {
+        }
+        if (params.property.name !== undefined) {
           Landlord.findByName(params.property.name, function(err, landlord) {
-            console.log(landlord);
-            landlord_id = landlord.id;
-            cb(null);
-          });
-        } else {
-          var newLandlord = {
-            name: params.property.name,
-            organization: params.property.organization,
-            city: params.property.city,
-            province: params.property.province
-          };
-          Landlord.create(newLandlord, function(err, landlord) {
-            if (err) return cb(err);
-            landlord_id = landlord.id;
-
-            console.log('new landlord', landlord);
+            if (err || landlord.length === 0) return cb(err);
+            console.log('getByName', landlord);
+            landlord_id = landlord[0].id;
             cb(null);
           });
         }
       },
       function(cb) {
-        params.property.owner_id = landlord_id;
-        console.log(params);
-        Property.create(params.property, function(err, property) {
+
+        // if we found something skip this landlord creation step
+        if(landlord_id !== undefined){
+          return cb(null);
+        }
+        console.log('landlord_id', landlord_id);
+        var newLandlord = {
+          name: params.property.name,
+          organization: params.property.organization,
+          city: params.property.location.city,
+          province: params.property.location.province
+        };
+        Landlord.create(newLandlord, function(err, landlord) {
           if (err) return cb(err);
           landlord_id = landlord.id;
-          //return res.status(201).json(property);
+
+          console.log('new landlord', landlord);
+          cb(null);
+        });
+      },
+      function(cb) {
+        params.property.owner_id = landlord_id;
+        Property.create(params.property, function(err, property) {
+          if (err) return cb(err);
+          return res.status(201).json({property: property});
           cb(null);
         });
       }
@@ -88,12 +99,11 @@ module.exports = {
         res.json(200, property)
       });
     } else {
-      var where = req.param('where');
       var options = {
         limit: req.param('limit') || undefined,
         skip: req.param('skip') || undefined,
         sort: req.param('sort') || undefined,
-        where: where || undefined
+        where:  req.param('where') || undefined
       };
       Property.find(options, function(err, result) {
         if (result === undefined) return res.notFound();
@@ -146,3 +156,19 @@ module.exports = {
     }
   }
 };
+
+
+function getByLandlordName (name) {
+  Landlord.findByName(name, function(err, landlord) {
+    if(err) return undefined;
+    console.log('get by name', landlord);
+    return landlord;
+  });
+}
+
+function getByLandlordID (id) {
+  Landlord.findOne(id, function(err, landlord) {
+    if (err) return undefined;
+    return landlord;
+  });
+}
