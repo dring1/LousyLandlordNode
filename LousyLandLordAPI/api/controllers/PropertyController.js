@@ -15,12 +15,6 @@ module.exports = {
     var landlord_id = params.owner_id;
     async.series([
       function(cb) {
-
-        // if no id search by name
-        console.log(params);
-        // if(params.property.owner_id === undefined || params.property.name === undefined){
-        //   return res.status(404).json('No landlord name or owner_id present');
-        // }
         if (params.property.owner_id) {
           Landlord.findOne(landlord_id, function(err, landlord) {
             if (err) return cb(err);
@@ -38,12 +32,10 @@ module.exports = {
         }
       },
       function(cb) {
-
         // if we found something skip this landlord creation step
         if(landlord_id !== undefined){
           return cb(null);
         }
-        console.log('landlord_id', landlord_id);
         var newLandlord = {
           name: params.property.name,
           organization: params.property.organization,
@@ -52,9 +44,8 @@ module.exports = {
         };
         Landlord.create(newLandlord, function(err, landlord) {
           if (err) return cb(err);
+          console.log('Landlord.create From PropertyController', landlord);
           landlord_id = landlord.id;
-
-          console.log('new landlord', landlord);
           cb(null);
         });
       },

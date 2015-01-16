@@ -133,19 +133,36 @@ angular.module('lousyLandLordSpaApp')
     };
 
     $scope.open = function (size) {
+<<<<<<< HEAD
+
+=======
       $scope.activeForm = false;
+>>>>>>> Form validation fixes, modal on form submission
       var modalInstance = $modal.open({
         templateUrl: 'formSubmission.html',
         controller: 'ModalFormCtrl',
         size: size,
         resolve: {
+<<<<<<< HEAD
+          items: function () {
+            return $scope.items;
+=======
           result: function() {
             return $scope.err;
+>>>>>>> Form validation fixes, modal on form submission
           }
         }
       });
 
+<<<<<<< HEAD
+      modalInstance.result.then(function (selectedItem) {
+        console.log('closed', selectedItem);
+        $scope.selected = selectedItem;
+
+        // restangular post to comments
+=======
       modalInstance.result.then(function (result) {
+>>>>>>> Form validation fixes, modal on form submission
       }, function () {
         $log.info('Modal dismissed at: ' + new Date());
       });
@@ -155,11 +172,26 @@ angular.module('lousyLandLordSpaApp')
   });
 
 
+<<<<<<< HEAD
+angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($scope, $modalInstance, items) {
+
+    $scope.items = items;
+    $scope.contact = {
+      selected: '',
+      text: ''
+    };
+
+
+    $scope.ok = function () {
+      console.log($scope.contact);
+      $modalInstance.close($scope.contact);
+=======
 angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($scope, $modalInstance, result) {
 
     $scope.result = result;
     $scope.ok = function () {
       $modalInstance.close();
+>>>>>>> Form validation fixes, modal on form submission
     };
 
     $scope.cancel = function () {

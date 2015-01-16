@@ -10,7 +10,11 @@
 
   <script type="text/ng-template" id="formSubmission.html">
     <div class="modal-header contact-modal">
+<<<<<<< HEAD
+      <h3 class="modal-title">Contact Us</h3>
+=======
       <h3 class="modal-title">{{result}}</h3>
+>>>>>>> Form validation fixes, modal on form submission
     </div>
 
     <div class="modal-footer">

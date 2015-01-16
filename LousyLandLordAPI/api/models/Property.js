@@ -51,9 +51,9 @@ module.exports = {
 
         // if regex, does it meet
 
-        return true;
+        //return true;
       })
-
+     return true;
     }
   },
 
