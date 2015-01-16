@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('FormCtrl', function($scope, landlordService, propertyService) {
+  .controller('FormCtrl', function($scope, landlordService, propertyService, $modal, $log) {
 
     $scope.activeForm = false;
 
@@ -82,20 +82,25 @@ angular.module('lousyLandLordSpaApp')
         'key': 'comment',
         'type': 'textarea',
         'placeholder': 'Make a comment'
-      }, {
-        type: 'actions',
-        items: [{
-          type: 'button',
-          style: 'btn-success ctrl-btn',
-          title: 'Submit',
-          onClick: 'submit()'
-        }, {
-          type: 'button',
-          style: 'btn-info',
-          title: 'Cancel',
-          onClick: 'cancel()'
-        }]
-      }
+      },
+      // {
+      //   type: 'actions',
+      //   items: [{
+      //     type: 'button',
+      //     style: 'btn-success ctrl-btn',
+      //     title: 'Submit',
+      //     onClick: 'submit(form)'
+      //   }, {
+      //     type: 'button',
+      //     style: 'btn-info',
+      //     title: 'Cancel',
+      //     onClick: 'cancel()'
+      //   }]
+      // },
+    {
+      type: 'submit',
+      title: 'Submit'
+    }
     ];
 
     $scope.newLandlord = {};
@@ -104,15 +109,20 @@ angular.module('lousyLandLordSpaApp')
     };
 
     $scope.cancel = function() {
-      console.log($scope.newLandlord);
+      $scope.form = {};
     };
 
-    $scope.submit = function() {
+    $scope.submit = function(form) {
       $scope.$broadcast('schemaFormValidate');
-      console.log($scope.newLandlord);
+      if(!form.$valid){
+        return;
+      }
       propertyService.submitProperty($scope.newLandlord)
-      .then(function(landlord) {
-        // body...
+      .then(function(data) {
+        $scope.newLandlord = {};
+        $scope.activeForm = false;
+        form.$setPristine();
+        $scope.open();
       })
       .catch(function(err) {
         console.log('err', err);
@@ -120,5 +130,48 @@ angular.module('lousyLandLordSpaApp')
       });
     };
 
+    $scope.open = function (size) {
+
+      var modalInstance = $modal.open({
+        templateUrl: 'formSubmission.html',
+        controller: 'ModalFormCtrl',
+        size: size,
+        resolve: {
+          items: function () {
+            return $scope.items;
+          }
+        }
+      });
+
+      modalInstance.result.then(function (selectedItem) {
+        console.log('closed', selectedItem);
+        $scope.selected = selectedItem;
+
+        // restangular post to comments
+      }, function () {
+        $log.info('Modal dismissed at: ' + new Date());
+      });
+    };
+
     $scope.error = false;
+  });
+
+
+angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($scope, $modalInstance, items) {
+
+    $scope.items = items;
+    $scope.contact = {
+      selected: '',
+      text: ''
+    };
+
+
+    $scope.ok = function () {
+      console.log($scope.contact);
+      $modalInstance.close($scope.contact);
+    };
+
+    $scope.cancel = function () {
+      $modalInstance.dismiss('cancel');
+    };
   });
