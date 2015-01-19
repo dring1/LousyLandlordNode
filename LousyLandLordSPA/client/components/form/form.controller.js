@@ -1,9 +1,16 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('FormCtrl', function($scope, landlordService, propertyService, $modal, $log) {
+  .controller('FormCtrl', function($rootScope, $scope, landlordService, propertyService, $modal, $log) {
 
     $scope.activeForm = false;
+    $scope.location = {};
+    $scope.place = {};
+
+    $rootScope.$on('property:selected', function(event, place) {
+      console.log(place);
+      $scope.place = place;
+    });
 
     $scope.schema = {
       type: 'object',
@@ -28,7 +35,8 @@ angular.module('lousyLandLordSpaApp')
               title: 'City',
               minLength: 3,
               maxLength: 60,
-              required: true
+              required: true,
+              pattern: /^[A-Za-z]/
             },
             province: {
               type: 'string',
@@ -42,23 +50,29 @@ angular.module('lousyLandLordSpaApp')
               title: 'Postal Code',
               minLength: 6,
               maxLength: 6,
-              placeholder: 'K1S3T8(No space)'
+              pattern: /^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$/
             }
           },
           required: ['address', 'unit', 'city', 'province', 'postal']
         },
         name: {
           type: 'string',
-          minLength: 2,
-          maxLength: 120,
+          minLength: 5,
+          maxLength: 60,
           title: 'Landlord Name',
-          required: true
+          required: true,
+          pattern: /\b[A-Z]+.+[?^ ][A-Z].{1,19}|\b[A-Z]+.+[?^,][A-Z].{1,19}/,
+          placeholder: 'John Smith',
+          validationMessage: {
+            "default": "Please enter a valid name."
+          }
         },
         organization: {
           type: 'string',
           minLength: 2,
           maxLength: 150,
-          title: 'Organization'
+          title: 'Organization',
+          pattern: /^[A-Z]([a-zA-Z0-9]|[- @\.#&!])*$/
         },
         comment: {
           type: 'string',
@@ -74,29 +88,15 @@ angular.module('lousyLandLordSpaApp')
     };
 
 
-    // style inline for buttons
     $scope.form = [
       'name',
-      'location',
-      'organization',{
+      // 'location',
+      'organization',
+      {
         'key': 'comment',
         'type': 'textarea',
-        'placeholder': 'Make a comment'
+        'placeholder': 'Leave a comment'
       },
-      // {
-      //   type: 'actions',
-      //   items: [{
-      //     type: 'button',
-      //     style: 'btn-success ctrl-btn',
-      //     title: 'Submit',
-      //     onClick: 'submit(form)'
-      //   }, {
-      //     type: 'button',
-      //     style: 'btn-info',
-      //     title: 'Cancel',
-      //     onClick: 'cancel()'
-      //   }]
-      // },
     {
       type: 'submit',
       title: 'Submit'
@@ -114,9 +114,11 @@ angular.module('lousyLandLordSpaApp')
 
     $scope.submit = function(form) {
       $scope.$broadcast('schemaFormValidate');
-      if(!form.$valid){
+      if(!form.$valid && !_.isEmpty($scope.place) ){
         return;
       }
+      // convert place -  place
+      $scope.newLandlord.location = propertyService.convertPlaceToLocation($scope.place);
       propertyService.submitProperty($scope.newLandlord)
       .then(function(data) {
         $scope.newLandlord = {};
