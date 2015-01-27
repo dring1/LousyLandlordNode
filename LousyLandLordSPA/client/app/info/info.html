@@ -14,7 +14,7 @@
     </div>
     <div class="row">
       <div class="col-md-3">Address:</div>
-      <div class="col-md-9">{{property.location.address}}, {{property.location.city}}, {{property.location.province}}</div>
+      <div class="col-md-9">{{property.location}}</div>
     </div>
     <div class="row">
       <div class="col-md-12">Comment:</div>
@@ -54,9 +54,9 @@
         Properties
         <ul>
           <li ng-if="showAllProperties" ng-repeat="property in landlord.properties">
-            {{property.location | propertyFilter }}
+            {{property.location }}
           </li>
-          <li ng-if="!showAllProperties"> {{landlord.properties[0].location | propertyFilter }} <a ng-click="showProperties()"> Show More </a></li>
+          <li ng-if="!showAllProperties"> {{landlord.properties[0].location }} <a ng-click="showProperties()"> Show More </a></li>
         </ul>
       </div>
     </div>

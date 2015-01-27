@@ -5,7 +5,7 @@
 
       var googleMaps;
 
-      $scope.cities = [];
+      $scope.properties = [];
 
       $scope.map = {
         control: {},
@@ -84,9 +84,10 @@
 
         //service call should return promise
         //fetch properties and return in nice format
-        propertyService.getProperties().then(function(data) {
-          angular.forEach(data, buildPropertyMarker);
-        });
+        // propertyService.getProperties().then(function(data) {
+        //   angular.forEach(data, buildPropertyMarker);
+        // });
+        populateMap();
       });
 
 
@@ -104,6 +105,23 @@
           longitude: property.longitude,
           property: property
         };
-        $scope.cities.push(marker);
+        $scope.properties.push(marker);
       }
+
+      function populateMap(){
+        propertyService.getProperties().then(function(data) {
+          //console.log(data);
+          angular.forEach(data, buildPropertyMarker);
+        });
+      }
+
+      $rootScope.$on('properties:update', function() {
+        $scope.properties = [];
+        populateMap();
+      });
+
+      $rootScope.$on('property:update', function(event, property) {
+        console.log(property);
+        buildPropertyMarker(property);
+      });
     });

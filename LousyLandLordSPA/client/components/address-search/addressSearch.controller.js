@@ -27,7 +27,8 @@ angular.module('lousyLandLordSpaApp')
   });
 
 
-  $scope.$on('property:create', function() {
-
+  $rootScope.$on('property:create', function() {
+    console.log('property created clear search');
+    $scope.place = null;
   });
 });

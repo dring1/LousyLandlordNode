@@ -2,7 +2,6 @@ var geocoderProvider = 'google',
   httpAdapter = 'http',
   geocoder = require('node-geocoder').getGeocoder(geocoderProvider, httpAdapter, {});
 module.exports = {
-
   types: {
     location: function(val) {
       // return (
@@ -12,48 +11,66 @@ module.exports = {
       //
       // )
 
-      var location = [{
-        name: 'address',
-        min: 6,
-        max: 120,
-        required: true
-      }, {
-        name: 'city',
-        min: 2,
-        max: 120,
-        required: true
-      }, {
-        name: 'province',
-        min: 2,
-        max: 120,
-        required: true
-      }, {
-        name: 'postal',
-        min: 6,
-        max: 6,
-        required: true
-      }, {
-        name: 'unit',
-        min: 0,
-        max: 5
-      }];
+      //   var location = [{
+      //     name: 'address',
+      //     min: 6,
+      //     max: 120,
+      //     required: true
+      //   }, {
+      //     name: 'city',
+      //     min: 2,
+      //     max: 120,
+      //     required: true
+      //   }, {
+      //     name: 'province',
+      //     min: 2,
+      //     max: 120,
+      //     required: true
+      //   }, {
+      //     name: 'postal',
+      //     min: 6,
+      //     max: 6,
+      //     required: true
+      //   }, {
+      //     name: 'unit',
+      //     min: 0,
+      //     max: 5
+      //   }];
+       //
+      //   _.each(location, function(attr) {
+      //     if (attr.required && val[attr.name] === undefined){
+      //       return false;
+      //     }
+      //     if (attr.min > val[attr.name].length) {
+      //       return false;
+      //     }
+      //     if (attr.max < val[attr.name].length) {
+      //       return false;
+      //     }
+       //
+      //     // if regex, does it meet
+       //
+      //     //return true;
+      //   })
+      //  return true;
 
-      _.each(location, function(attr) {
-        if (attr.required && val[attr.name] === undefined){
-          return false;
+      var supportedCountries = ['Canada', 'USA', 'United States', 'United States of America'];
+      for(var i = 0; i < supportedCountries.length; i++){
+        if(val.indexOf(supportedCountries[i]) > -1){
+          return true;
         }
-        if (attr.min > val[attr.name].length) {
-          return false;
-        }
-        if (attr.max < val[attr.name].length) {
-          return false;
-        }
+      }
 
-        // if regex, does it meet
-
-        //return true;
-      })
-     return true;
+      geocoder.geocode(val, function(err, geo) {
+        console.log(err);
+        // if (err) return false;
+        // return err || true;
+        return err === undefined ? true : false;
+      });
+      return false;
+    },
+    point: function(loc) {
+      return loc.x && loc.y
     }
   },
 
@@ -66,7 +83,7 @@ module.exports = {
       //turn into relationship me tinks?
       // nested fields
       required: true,
-      type: 'json',
+      type: 'string',
       unique: true,
       location: true
     },
@@ -81,15 +98,19 @@ module.exports = {
     latitude: {
       required: false,
       type: 'string'
+    },
+    geo_point: {
+      required: false,
+      point: true
     }
   },
 
   beforeCreate: function(values, cb) {
-    if (values.longitude && values.latitude) cb();
-    var address = [values.location.address, values.location.city,
-      values.location.province, values.location.country, values.location.postalCode
-    ].join(', ');
-    geocoder.geocode(address, function(err, geo) {
+    // if (values.longitude && values.latitude) cb();
+    // var address = [values.location.address, values.location.city,
+    //   values.location.province, values.location.country, values.location.postalCode
+    // ].join(', ');
+    geocoder.geocode(values.location, function(err, geo) {
       if (err) return cb(err);
       var loc = geo[0]
       values.longitude = loc.longitude;

@@ -55,25 +55,31 @@ angular.module('lousyLandLordSpaApp')
     }
 
     function convertPlaceToLocation(place){
-      var address_components = place.address_components;
+      var adrCmpnts = place.address_components;
+      var location = {};
+      for(var i = 0;i<adrCmpnts.length; i++){
+        location[adrCmpnts[i].types[0]] = adrCmpnts[i].long_name;
+      }
+      console.log(location);
+      return location;
       // assuming the structure of the object is that of a g place
       // var number, street, neighborhood, suburb,
       // var unit = place.address_components[0],
       //     street = place.address_components[0]
       // don't mind the godawful hardcoding...
-      var street_number = address_components[0].long_name;
-      var street = address_components[1].long_name;
-      var city = address_components[3].long_name;
-      var province = address_components[5].long_name;
-      var country = address_components[6].long_name;
-      var postal_code = address_components[7].long_name;
-      return {
-        address: [street_number, street].join(' '),
-        city: city,
-        province: province,
-        postal: postal_code,
-        country: country
-      }
+      // var street_number = address_components[0].long_name;
+      // var street = address_components[1].long_name;
+      // var city = address_components[3].long_name;
+      // var province = address_components[5].long_name;
+      // var country = address_components[6].long_name;
+      // var postal_code = address_components[7].long_name;
+      // return {
+      //   address: [street_number, street].join(' '),
+      //   city: city,
+      //   province: province,
+      //   postal: postal_code,
+      //   country: country
+      // }
     }
 
     return {

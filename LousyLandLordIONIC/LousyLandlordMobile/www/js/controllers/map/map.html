@@ -1,0 +1,10 @@
+<div ng-controller="MapController" data-tap-disabled="true">
+  <ui-gmap-google-map center='map.center' zoom='map.zoom'>
+    <ui-gmap-markers
+    models="properties"
+    coords="'self'"
+    click="'selectProperty()'"
+    events="markersEvents">
+  </ui-gmap-markers>
+  </ui-gmap-google-map>
+</div>

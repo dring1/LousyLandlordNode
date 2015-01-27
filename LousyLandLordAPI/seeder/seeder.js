@@ -48,19 +48,19 @@ async.series([
     console.log('Create Properties');
 
     // sync create
-    for (var i = 0; i < 1000; i++) {
+    for (var i = 0; i < 10; i++) {
       var property = {
-        owner_id: landlord_ids[Math.floor(Math.random() * landlord_ids.length)],
-        location: {
-          address: chance.address(),
-          city: chance.city(),
-          province: chance.province(),
-          country: 'Canada',
-          postalCode: chance.postal()
-        },
-        comment: chance.sentence(),
-        longitude: chance.longitude(),
-        latitude: chance.latitude()
+        property: {
+          owner_id: landlord_ids[Math.floor(Math.random() * landlord_ids.length)],
+          location: chance.address() + ' Canada',
+          comment: chance.sentence(),
+          longitude: chance.longitude(),
+          latitude: chance.latitude(),
+          point: {
+            x: chance.longitude(),
+            y: chance.latitude()
+          }
+        }
       }
       properties.push(property);
     }
@@ -73,11 +73,13 @@ async.series([
         json: true,
         body: property
       }
+      setTimeout(function() {
+        request(options, function(err, res, body) {
+          property_ids.push(body.id);
+          if (property_ids.length === 10) cb(null);
+        });
+      }, 10000);
 
-      request(options, function(err, res, body) {
-        property_ids.push(body.id);
-        if (property_ids.length === 1000) cb(null);
-      });
     });
   }
 ], function(cb) {

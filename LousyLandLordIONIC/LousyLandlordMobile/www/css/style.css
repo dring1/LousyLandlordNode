@@ -1,0 +1,27 @@
+/* Empty. Add your own CSS if you like */
+.angular-google-map-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.address-search-bar{
+  z-index: 3001;
+  position: absolute;
+  top: 44px;
+  width: 100vw;
+}
+
+.pac-container {
+  z-index: 1200 !important;
+}
+
+.property-info{
+  /*margin: 0 auto;*/
+  position: absolute;
+  bottom: 0;
+  /*width: 95vw;*/
+}

@@ -6,9 +6,12 @@ angular.module('lousyLandLordSpaApp')
     $scope.activeForm = false;
     $scope.location = {};
     $scope.place = {};
+    $scope.addrErr = false;
+    $scope.addLandlordDisabled = true;
 
     $rootScope.$on('property:selected', function(event, place) {
       console.log(place);
+      $scope.addLandlordDisabled = false;
       $scope.place = place;
     });
 
@@ -58,13 +61,13 @@ angular.module('lousyLandLordSpaApp')
         name: {
           type: 'string',
           minLength: 5,
-          maxLength: 60,
+          maxLength: 39,
           title: 'Landlord Name',
           required: true,
           pattern: /\b[A-Z]+.+[?^ ][A-Z].{1,19}|\b[A-Z]+.+[?^,][A-Z].{1,19}/,
           placeholder: 'John Smith',
           validationMessage: {
-            "default": "Please enter a valid name."
+            'default': 'Please enter a valid name.'
           }
         },
         organization: {
@@ -72,7 +75,7 @@ angular.module('lousyLandLordSpaApp')
           minLength: 2,
           maxLength: 150,
           title: 'Organization',
-          pattern: /^[A-Z]([a-zA-Z0-9]|[- @\.#&!])*$/
+          //pattern: /^[A-Z]([a-zA-Z0-9]|[- @\.#&!])*$/
         },
         comment: {
           type: 'string',
@@ -114,17 +117,24 @@ angular.module('lousyLandLordSpaApp')
 
     $scope.submit = function(form) {
       $scope.$broadcast('schemaFormValidate');
-      if(!form.$valid && !_.isEmpty($scope.place) ){
+      if(!form.$valid){
         return;
       }
-      // convert place -  place
-      $scope.newLandlord.location = propertyService.convertPlaceToLocation($scope.place);
+      console.log($scope.place);
+      if( _.isEmpty($scope.place) || $scope.place.formatted_address === undefined){
+        $scope.open({title: 'Invalid Address', message: 'We rely on Google Maps to find the address, and Google is unable to find it.'});
+        return;
+      }
+      $scope.newLandlord.location = $scope.place.formatted_address;
+      console.log($scope.newLandlord);
       propertyService.submitProperty($scope.newLandlord)
       .then(function(data) {
         $scope.newLandlord = {};
         $scope.activeForm = false;
         form.$setPristine();
-        $scope.open();
+        $scope.open({title: 'Success', message: 'Thank you for submitting a landlord'});
+        $rootScope.$broadcast('property:update', data.property);
+        $rootScope.$broadcast('property:create');
       })
       .catch(function(err) {
         console.log('err', err);
@@ -134,15 +144,14 @@ angular.module('lousyLandLordSpaApp')
       });
     };
 
-    $scope.open = function (size) {
+    $scope.open = function (msg) {
       $scope.activeForm = false;
       var modalInstance = $modal.open({
         templateUrl: 'formSubmission.html',
         controller: 'ModalFormCtrl',
-        size: size,
         resolve: {
           result: function() {
-            return $scope.err;
+            return msg;
           }
         }
       });
@@ -162,9 +171,5 @@ angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($sco
     $scope.result = result;
     $scope.ok = function () {
       $modalInstance.close();
-    };
-
-    $scope.cancel = function () {
-      $modalInstance.dismiss('cancel');
     };
   });

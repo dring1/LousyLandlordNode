@@ -1,6 +1,7 @@
 <div ng-controller="FormCtrl">
-  <button class="btn btn-success show-form-btn" ng-click="toggleForm()">
-    <span ng-show="!activeForm" class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  <button class="btn btn-success show-form-btn" ng-click="toggleForm()" ng-disabled="addLandlordDisabled">
+    <span ng-show="!activeForm" class="glyphicon glyphicon-plus" aria-hidden="true">Landlord</span>
+
     <span ng-show="activeForm" class="glyphicon glyphicon-minus" aria-hidden="true"></span>
   </button>
   <br/>
@@ -10,12 +11,15 @@
 
   <script type="text/ng-template" id="formSubmission.html">
     <div class="modal-header contact-modal">
-      <h3 class="modal-title">{{result}}</h3>
+      <h3 class="modal-title">{{result.title}}</h3>
+    </div>
+
+    <div>
+      <h4>{{result.message}}</h4>
     </div>
 
     <div class="modal-footer">
       <button class="btn btn-primary" ng-click="ok()">OK</button>
-      <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
     </div>
   </script>
 </div>

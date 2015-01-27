@@ -19,11 +19,11 @@ module.exports = {
       required: 'false'
     },
     city: {
-      required: true,
+      required: false,
       type: 'string'
     },
     province: {
-      required: true,
+      required: false,
       type: 'string'
     },
     phoneNumber: {

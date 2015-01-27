@@ -1,10 +1,10 @@
 .form-input{
-  z-index: 2999;
+  z-index: 2 !important;
   color: #0c0c0c;
   width: 100%;
   position: absolute;
-  top: 50px;
-  left: 0px;
+  top: 0px;
+  left: 355px;
 
 }
 
@@ -15,5 +15,13 @@
 
 .ctrl-btn{
 
-  margin-bottom: 20px;
+  margin-bottom: 17px;
+}
+
+.pac-container {
+  z-index: 4001 !important;
+}
+
+.ui-autocomplete {
+  z-index: 1051 !important;
 }

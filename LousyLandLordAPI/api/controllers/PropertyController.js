@@ -1,3 +1,4 @@
+
 /**
  * PropertyController
  *
@@ -13,10 +14,14 @@ module.exports = {
 
   create: function(req, res, next) {
     var params = req.params.all();
-    var landlord_id = params.owner_id;
+    if(params.property === undefined){
+      sails.log.error('[PropertyController] Undefined Property in Post Body' );
+      return res.status(500).json({message: 'No property in POST body'})
+    }
+    var landlord_id = params.property.owner_id;
     async.series([
       function(cb) {
-        if (params.property.owner_id) {
+        if (params.property.owner_id !== undefined) {
           Landlord.findOne(landlord_id, function(err, landlord) {
             if (err) return cb(err);
             landlord_id = landlord.id;
@@ -26,7 +31,6 @@ module.exports = {
         if (params.property.name !== undefined) {
           Landlord.findByName(params.property.name, function(err, landlord) {
             if (err || landlord.length === 0) return cb(err);
-            console.log('getByName', landlord);
             landlord_id = landlord[0].id;
             cb(null);
           });
@@ -34,18 +38,17 @@ module.exports = {
       },
       function(cb) {
         // if we found something skip this landlord creation step
+        console.log('k');
         if(landlord_id !== undefined){
           return cb(null);
         }
         var newLandlord = {
           name: params.property.name,
-          organization: params.property.organization,
-          city: params.property.location.city,
-          province: params.property.location.province
+          organization: params.property.organization
         };
         Landlord.create(newLandlord, function(err, landlord) {
           if (err) return cb(err);
-          console.log('Landlord.create From PropertyController', landlord);
+          sails.log.info('[PropertyController] Create Landlord', landlord);
           landlord_id = landlord.id;
           cb(null);
         });
@@ -54,15 +57,16 @@ module.exports = {
         params.property.owner_id = landlord_id;
         Property.create(params.property, function(err, property) {
           if (err) return cb(err);
+          sails.log.info('[PropertyController] Created', property);
           return res.status(201).json({property: property});
           cb(null);
         });
       }
     ], function(err) {
       if (err) {
-        console.log(err);
+        sails.log.error('[PropertyController] Error', err);
         return res.status(500).json({
-          message: 'duplicate entry'
+          message: err
         });
       }
     });
