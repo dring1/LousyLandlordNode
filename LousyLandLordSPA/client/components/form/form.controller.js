@@ -120,13 +120,11 @@ angular.module('lousyLandLordSpaApp')
       if(!form.$valid){
         return;
       }
-      console.log($scope.place);
       if( _.isEmpty($scope.place) || $scope.place.formatted_address === undefined){
         $scope.open({title: 'Invalid Address', message: 'We rely on Google Maps to find the address, and Google is unable to find it.'});
         return;
       }
       $scope.newLandlord.location = $scope.place.formatted_address;
-      console.log($scope.newLandlord);
       propertyService.submitProperty($scope.newLandlord)
       .then(function(data) {
         $scope.newLandlord = {};
@@ -137,9 +135,8 @@ angular.module('lousyLandLordSpaApp')
         $rootScope.$broadcast('property:create');
       })
       .catch(function(err) {
-        console.log('err', err);
         $scope.err = err;
-        $scope.open();
+        $scope.open({title: 'Something went wrong', message: err});;
         $scope.error = true;
       });
     };
@@ -167,9 +164,14 @@ angular.module('lousyLandLordSpaApp')
 
 
 angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($scope, $modalInstance, result) {
-
+    console.log(result);
     $scope.result = result;
-    $scope.ok = function () {
+
+    $scope.ok = function close () {
       $modalInstance.close();
     };
+
+    // $timeout(function() {
+    //   close();
+    // }, 1000)
   });

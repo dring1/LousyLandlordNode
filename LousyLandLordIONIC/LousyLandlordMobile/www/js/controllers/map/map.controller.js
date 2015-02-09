@@ -1,8 +1,11 @@
 'use strict';
 
 angular.module('LousyLandlordMobileApp')
-.controller('MapController', function ($rootScope, $scope, uiGmapGoogleMapApi, propertyService) {
+.controller('MapController', function ($rootScope, $scope, uiGmapGoogleMapApi, propertyService, geolocation) {
 
+    // geolocation.getLocation().then(function(data){
+    //     $scope.coords = {lat:data.coords.latitude, long:data.coords.longitude};
+    //   });
 
     var googleMaps;
 
@@ -10,10 +13,10 @@ angular.module('LousyLandlordMobileApp')
 
     $scope.map = {
       control: {},
-      zoom: 9,
+      zoom: 18,
       center: {
-        latitude: 45.4248,
-        longitude: -75.6992
+        latitude: 43.6525,
+        longitude: -79.3816667
       },
       options: {
         streetViewControl: true,
@@ -54,12 +57,15 @@ angular.module('LousyLandlordMobileApp')
         }, ]
       },
       clusterOptions: {
-        averageCenter: true,
-        maxZoom: 18
+          averageCenter: true,
+          maxZoom: 18
+        },
+      events: {
+        click: function () {
+          console.log('called');
+          $rootScope.$broadcast('panel:close');
+        }
       },
-      // events: {
-      //   tilesloaded: function (map) {}
-      // },
     };
 
     $scope.showWeather = false;
@@ -118,6 +124,7 @@ angular.module('LousyLandlordMobileApp')
       propertyService.getProperties().then(function(data) {
         console.log(data);
         angular.forEach(data, buildPropertyMarker);
+
       });
     }
 

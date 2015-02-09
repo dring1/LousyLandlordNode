@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($scope, $modal, $log) {
+angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($scope, $modal, $log, $http, config) {
 
   $scope.items = ['Comment', 'Concern', 'Wrongful Accusation'];
 
@@ -18,11 +18,14 @@ angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($scope
       }
     });
 
-    modalInstance.result.then(function (selectedItem) {
-      console.log('closed', selectedItem);
-      $scope.selected = selectedItem;
-
-      // restangular post to comments
+    modalInstance.result.then(function (comment) {
+      $http.post(config.getBaseURL() + 'comments', comment)
+      .then(function() {
+        console.log('submitted');
+      })
+      .catch(function(err) {
+        console.log(err);
+      })
     }, function () {
       $log.info('Modal dismissed at: ' + new Date());
     });

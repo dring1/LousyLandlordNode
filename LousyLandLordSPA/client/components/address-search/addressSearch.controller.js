@@ -23,6 +23,7 @@ angular.module('lousyLandLordSpaApp')
     };
     // zoom to location
     $rootScope.$broadcast('map:zoom', loc);
+    
     $rootScope.$broadcast('property:selected', place);
   });
 

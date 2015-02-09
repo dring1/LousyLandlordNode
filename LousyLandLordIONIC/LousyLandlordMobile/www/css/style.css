@@ -25,3 +25,16 @@
   bottom: 0;
   /*width: 95vw;*/
 }
+
+.form-frame{
+  position: absolute;
+  top: 15vh;
+  height: 85vh;
+  width: 100%;
+  background-color: #a8c8e2;
+  opacity: 0.8;
+}
+
+.center{
+  margin: 0 auto;
+}

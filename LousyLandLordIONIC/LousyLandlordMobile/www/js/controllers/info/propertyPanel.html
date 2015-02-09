@@ -1,8 +1,34 @@
-<div ng-controller="InfoController" class="property-card card">
-  <div class="item item-divider">
-    {{property}}
+<div>
+  <div class="item item-divider row">
+    <span class="col col-80">
+      <span class="name">{{property.name}}</span>
+    </span>
+    <span class="btn-close col col-20">
+      <a ng-click="closePanels()" class=" button button-icon icon ion-ios-close-outline padding-left"></a>
+    </span>
   </div>
   <div class="item item-text-wrap">
-    {{properties.location}}
+    {{property.location}}
   </div>
+  <div class="item item-text-wrap">
+    {{property.comment}}
+  </div>
+  <!-- <div class="item item-divider">
+    <button class="button">
+      Close
+    </button>
+  </div> -->
+  <!-- <swipe-cards>
+    <swipe-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)">
+      <div class="item item-divider">
+        {{card.name}}
+      </div>
+      <div class="item item-text-wrap">
+        {{card.location}}
+      </div>
+      <div class="item item-text-wrap">
+        {{card.comment}}
+      </div>
+    </swipe-card>
+  </swipe-cards> -->
 </div>

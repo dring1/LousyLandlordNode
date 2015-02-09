@@ -10,7 +10,6 @@ angular.module('lousyLandLordSpaApp', [
   'uiGmapgoogle-maps',
   'google.places',
   'schemaForm',
-  'stripe',
   'angularModalService',
   'ngCookies'
 

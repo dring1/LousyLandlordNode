@@ -4,8 +4,10 @@
 angular.module('lousyLandLordSpaApp')
 .controller('InfoCtrl', function ($scope, $q, landlordService, propertyService) {
 
+  $scope.frame = false;
   $scope.propertyPanel = false;
   $scope.landlordPanel = false;
+
 
   $scope.$on('property:select', function(e, property) {
     closePanels();
@@ -18,7 +20,7 @@ angular.module('lousyLandLordSpaApp')
       console.log('data', data[0], data[1]);
       $scope.landlord = data[0].data;
       $scope.properties = data[1].data;
-      $scope.propertyPanel = true;
+      $scope.frame =  $scope.propertyPanel = true;
     });
   });
 
@@ -29,12 +31,14 @@ angular.module('lousyLandLordSpaApp')
     .then(function(properties) {
       $scope.landlord.comments = _.pluck(properties, 'comment');
       $scope.landlord.properties = properties;
-      $scope.landlordPanel = true;
+      $scope.frame = $scope.landlordPanel = true;
+
     });
   });
 
 
   function closePanels() {
+    $scope.frame = false;
     $scope.propertyPanel = false;
     $scope.landlordPanel = false;
     $scope.showAllComments = false;

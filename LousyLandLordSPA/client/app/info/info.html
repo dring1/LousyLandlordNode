@@ -1,68 +1,69 @@
-<div ng-controller="InfoCtrl">
-
-  <div ng-show="propertyPanel" class="panel content">
-    <button class="btn btn-danger pull-right btn-close" ng-click="closePanels()">
-      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-    </button>
-    <div class="row">
-      <h3 class="col-md-12">Property</h3>
-    </div>
-    <div class="row">
-      <div class="col-md-3">Landlord:</div>
-      <div class="col-md-9"><a href="#" class="pull-left" ng-click="showLandlord(landlord)">{{landlord.name}}</a>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-3">Address:</div>
-      <div class="col-md-9">{{property.location}}</div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">Comment:</div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-12 pull-right">{{property.comment}}</div>
-    </div>
+<div ng-show="frame" ng-controller="InfoCtrl" class="panel panel-primary">
+  <div class="panel-heading">Information
+    <span ng-click="closePanels()" class="pull-right btn-close glyphicon glyphicon-remove"></span>
   </div>
-  <div ng-show="landlordPanel" class="panel">
-    <button class="btn btn-danger pull-right btn-close" ng-click="closePanels()">
-      <span class="glyphicon glyphicon-minus-sign" aria-hidden="true"></span>
-    </button>
-    <div class="info">
+  <div class="panel-body">
+    <div ng-show="propertyPanel">
       <div class="row">
-        <h3 class="col-md-12">Landlord</h3>
+        <h3 class="col-md-12">Property</h3>
       </div>
       <div class="row">
-        <div class="col-md-3"><h4>Name:</h4></div>
-        <div class="col-md-9">
-          <h4>{{landlord.name}}</h4>
+        <div class="col-md-3">Landlord:</div>
+        <div class="col-md-9"><a href="#" class="pull-left" ng-click="showLandlord(landlord)">{{landlord.name}}</a>
         </div>
       </div>
-      <div ng-if="landlord.comments.length > 0">
-
-        Comments:
-        <ul>
-          <li ng-if="showAllComments" ng-repeat="comment in landlord.comments">
-            {{comment | limitTo: 140}}
-          </li>
-          <li ng-if="!showAllComments"> {{landlord.comments[0]}} <a ng-click="showComments()"> Show More </a></li>
-
-        </ul>
+      <div class="row">
+        <div class="col-md-3">Address:</div>
+        <div class="col-md-9">{{property.location}}</div>
       </div>
-        <!-- same thing for properties show all options -->
-      <div ng-if="landlord.properties.length > 0">
-        Properties
-        <ul>
-          <li ng-if="showAllProperties" ng-repeat="property in landlord.properties">
-            {{property.location }}
-          </li>
-          <li ng-if="!showAllProperties"> {{landlord.properties[0].location }} <a ng-click="showProperties()"> Show More </a></li>
-        </ul>
+      <div class="row">
+        <div class="col-md-12">Comment:</div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 pull-right">{{property.comment}}</div>
       </div>
     </div>
 
+    <div ng-show="landlordPanel">
+      <div class="info">
+        <div class="row">
+          <h3 class="col-md-12">Landlord</h3>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <h4>Name:</h4>
+          </div>
+          <div class="col-md-9">
+            <h4>{{landlord.name}}</h4>
+          </div>
+        </div>
+        <div ng-if="landlord.comments.length > 0">
+
+          Comments:
+          <ul>
+            <li ng-if="showAllComments" ng-repeat="comment in landlord.comments">
+              {{comment | limitTo: 140}}
+            </li>
+            <li ng-if="!showAllComments"> {{landlord.comments[0]}} <a ng-click="showComments()"> Show More </a>
+            </li>
+
+          </ul>
+        </div>
+        <div ng-if="landlord.properties.length > 0">
+          Properties
+          <ul>
+            <li ng-if="showAllProperties" ng-repeat="property in landlord.properties">
+              {{property.location }}
+            </li>
+            <li ng-if="!showAllProperties"> {{landlord.properties[0].location }} <a ng-click="showProperties()"> Show More </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
   </div>
 
-</div>
 
 </div>

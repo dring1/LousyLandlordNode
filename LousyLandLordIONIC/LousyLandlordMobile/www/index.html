@@ -9,6 +9,7 @@
     <link href="css/style.css" rel="stylesheet">
     <link href="lib/angular-google-places-autocomplete/dist/autocomplete.min.css" rel="stylesheet"></link>
     <link href="js/controllers/info/info.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
 
     <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
     <link href="css/ionic.app.css" rel="stylesheet">
@@ -19,10 +20,11 @@
 
     <script src="lib/ion-google-place/ion-google-place.js"></script>
     <script src="lib/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
-    <script src="lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
+
     <script src="lib/angular-touch/angular-touch.min.js"></script>
     <script src="lib/lodash/lodash.js"></script>
-
+    <script src="lib/ionic-ion-swipe-cards/ionic.swipecards.js"></script>
+    <script src="lib/angularjs-geolocation/dist/angularjs-geolocation.min.js"></script>
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
 
@@ -31,23 +33,38 @@
     <script src="js/controllers/search-controller/search.controller.js"></script>
     <script src="js/controllers/map/map.controller.js"></script>
     <script src="js/controllers/info/info.controller.js"></script>
+    <script src="js/controllers/add-form/form.controller.js"></script>
     <script src="js/services/config.service.js"></script>
     <script src="js/services/property.service.js"></script>
     <script src="js/services/landlord.service.js"></script>
 
     <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+    <!-- // <script src="http://rawgit.com/angular-ui/angular-google-maps/master/dist/angular-google-maps.js"></script> -->
+    <script src="lib/angular-google-maps/dist/angular-google-maps.js"></script>
+
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-43223550-2', 'auto');
+      ga('send', 'pageview');
+
+    </script>
   </head>
-  <body ng-app="LousyLandlordMobileApp">
+  <body ng-app="LousyLandlordMobileApp" >
     <ionic-pane>
     <div class="bar bar-header bar-positive">
       <h1 class="title">Lousy Landlord</h1>
     </div>
-  </ionic-pane>
+    </ionic-pane>
     <ionic-content class="has-header">
     <div class="address-search-bar" ng-include="'js/controllers/search-controller/address.search.html'"></div>
     <div ng-include="'js/controllers/map/map.html'"></div>
     <div ng-include="'js/controllers/info/infoM.html'"></div>
-    
+    <div ng-include="'js/controllers/add-form/form.html'"></div>
   </ionic-content>
   </body>
 </html>

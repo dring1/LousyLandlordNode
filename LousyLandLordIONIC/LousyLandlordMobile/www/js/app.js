@@ -7,7 +7,9 @@ angular.module('LousyLandlordMobileApp', [
 'ionic',
 'google.places',
 'uiGmapgoogle-maps',
-'ngTouch'
+'ngTouch',
+'ionic.contrib.ui.cards',
+'geolocation'
 ])
 
 .run(function($ionicPlatform) {

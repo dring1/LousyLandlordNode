@@ -9,6 +9,13 @@
     "angular-google-places-autocomplete": "~0.2.4",
     "angular-google-maps": "~2.0.12",
     "lodash": "~3.0.0",
-    "angular-touch": "~1.3.11"
+    "angular-touch": "~1.3.11",
+    "ionic-ion-swipe-cards": "*",
+    "angular-schema-form": "~0.7.10",
+    "angularjs-geolocation": "~0.1.1"
+  },
+  "resolutions": {
+    "lodash": "~3.0.0",
+    "angular": ">= 1.0.8"
   }
 }

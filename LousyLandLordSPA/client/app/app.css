@@ -38,7 +38,7 @@
     padding: 0.2em 0;
 }
 
-.panel{
+.custom-panel{
   -moz-border-radius: 15px;
   border-radius: 4px;
   background-color: rgba(227, 208, 196, 0.82);

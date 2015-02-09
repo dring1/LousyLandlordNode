@@ -1,3 +1,23 @@
  <div ng-controller="SearchController">
-   <input type="text" g-places-autocomplete ng-model="place" forceSelection="true" options="autocompleteOptions" placeholder="Search for an address.." />
+   <!-- <input type="text" g-places-autocomplete ng-model="place" forceSelection="true" options="autocompleteOptions" placeholder="Search for an address.." /> -->
+   <!-- <div class="row">
+
+     <button class="col col-25 button button-clear"> Cancel </button>
+   </div> -->
+
+<div class="bar bar-header item-input-inset">
+
+  <label class="item-input-wrapper">
+    <i class="icon ion-ios7-search placeholder-icon"></i>
+    <input type="text" g-places-autocomplete ng-model="place" forceSelection="true" options="autocompleteOptions" placeholder="Search for an address.." />
+    <button ng-show="addProperty" ng-click="add()" class="button button-clear">
+      <i class="icon ion-plus-round"></i>
+    </button>
+  </label>
+
+  <button ng-click="clear()" class="button button-clear">
+    Cancel
+  </button>
+</div>
+
  </div>
