@@ -1,12 +1,12 @@
 'use strict';
 
 
-angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($scope, $modal, $log, $http, config) {
+angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($rootScope, $scope, $modal, $log, $http, config) {
 
   $scope.items = ['Comment', 'Concern', 'Wrongful Accusation'];
 
   $scope.open = function (size) {
-
+    $rootScope.$broadcast('modal:open');
     var modalInstance = $modal.open({
       templateUrl: 'contact.html',
       controller: 'ModalContactCtrl',
@@ -25,14 +25,14 @@ angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($scope
       })
       .catch(function(err) {
         console.log(err);
-      })
+      });
     }, function () {
-      $log.info('Modal dismissed at: ' + new Date());
+      $rootScope.$broadcast('modal:close');
     });
   };
 });
 
-angular.module('lousyLandLordSpaApp').controller('ModalContactCtrl', function ($scope, $modalInstance, items) {
+angular.module('lousyLandLordSpaApp').controller('ModalContactCtrl', function ($rootScope, $scope, $modalInstance, items) {
 
   $scope.items = items;
   $scope.contact = {
@@ -42,7 +42,7 @@ angular.module('lousyLandLordSpaApp').controller('ModalContactCtrl', function ($
 
 
   $scope.ok = function () {
-    console.log($scope.contact);
+
     $modalInstance.close($scope.contact);
   };
 

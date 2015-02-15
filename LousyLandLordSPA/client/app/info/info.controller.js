@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-.controller('InfoCtrl', function ($scope, $q, landlordService, propertyService) {
+.controller('InfoCtrl', function ($rootScope, $scope, $q, landlordService, propertyService) {
 
   $scope.frame = false;
   $scope.propertyPanel = false;
@@ -17,7 +17,6 @@ angular.module('lousyLandLordSpaApp')
         propertyPromise = propertyService.searchProperties({owner_id: owner_id});
     $q.all([landlordPromise, propertyPromise])
     .then(function(data) {
-      console.log('data', data[0], data[1]);
       $scope.landlord = data[0].data;
       $scope.properties = data[1].data;
       $scope.frame =  $scope.propertyPanel = true;
@@ -69,4 +68,12 @@ angular.module('lousyLandLordSpaApp')
   $scope.showProperties = function() {
     $scope.showAllProperties = true;
   };
+
+  // $rootScope.$on('modal:close', function() {
+  //   closeAllPanels();
+  // });
+  //
+  // $rootScope.$on('modal:open', function() {
+  //   // body...
+  // });
 });

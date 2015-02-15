@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp', [
-  'ngCookies',
   'ngResource',
   'ui.select',
   'ngSanitize',
@@ -11,12 +10,10 @@ angular.module('lousyLandLordSpaApp', [
   'google.places',
   'schemaForm',
   'angularModalService',
-  'ngCookies'
-
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
       .otherwise('/home');
-
+    //  set up api end point
     $locationProvider.html5Mode(true);
   });

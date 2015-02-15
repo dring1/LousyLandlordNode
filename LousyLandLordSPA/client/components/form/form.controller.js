@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .controller('FormCtrl', function($rootScope, $scope, landlordService, propertyService, $modal, $log) {
+  .controller('FormCtrl', function($rootScope, $scope, landlordService, propertyService, $modal) {
 
     $scope.activeForm = false;
     $scope.location = {};
@@ -136,13 +136,14 @@ angular.module('lousyLandLordSpaApp')
       })
       .catch(function(err) {
         $scope.err = err;
-        $scope.open({title: 'Something went wrong', message: err});;
+        $scope.open({title: 'Something went wrong', message: err});
         $scope.error = true;
       });
     };
 
     $scope.open = function (msg) {
       $scope.activeForm = false;
+      $rootScope.$broadcast('modal:open');
       var modalInstance = $modal.open({
         templateUrl: 'formSubmission.html',
         controller: 'ModalFormCtrl',
@@ -153,9 +154,10 @@ angular.module('lousyLandLordSpaApp')
         }
       });
 
-      modalInstance.result.then(function (result) {
+      modalInstance.result.then(function () {
       }, function () {
-        $log.info('Modal dismissed at: ' + new Date());
+        // $log.info('Modal dismissed at: ' + new Date());
+        $rootScope.$broadcast('modal:close');
       });
     };
 
@@ -170,8 +172,4 @@ angular.module('lousyLandLordSpaApp').controller('ModalFormCtrl', function ($sco
     $scope.ok = function close () {
       $modalInstance.close();
     };
-
-    // $timeout(function() {
-    //   close();
-    // }, 1000)
   });

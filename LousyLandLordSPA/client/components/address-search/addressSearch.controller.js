@@ -3,6 +3,7 @@
 
 angular.module('lousyLandLordSpaApp')
 .controller('AddressSearchCtrl', function($rootScope, $scope) {
+  $scope.disable = false;
 
   $scope.place = null;
   $scope.autocompleteOptions = {
@@ -23,7 +24,7 @@ angular.module('lousyLandLordSpaApp')
     };
     // zoom to location
     $rootScope.$broadcast('map:zoom', loc);
-    
+
     $rootScope.$broadcast('property:selected', place);
   });
 
@@ -31,5 +32,13 @@ angular.module('lousyLandLordSpaApp')
   $rootScope.$on('property:create', function() {
     console.log('property created clear search');
     $scope.place = null;
+  });
+
+  $rootScope.$on('modal:open', function() {
+    $scope.disable = true;
+  });
+
+  $rootScope.$on('modal:close', function() {
+    $scope.disable = false;
   });
 });

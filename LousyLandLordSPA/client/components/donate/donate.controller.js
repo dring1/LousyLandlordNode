@@ -1,6 +1,6 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-.controller('DonateCtrl', function ($scope) {
+.controller('DonateCtrl', function () {
 
 });

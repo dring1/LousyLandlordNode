@@ -16,18 +16,20 @@
         },
         options: {
           streetViewControl: true,
+          mapTypeControl: false,
+          mapTypeControlOptions: false,
           panControl: true,
           maxZoom: 20,
           minZoom: 3,
           styles: [{
             'featureType': 'administrative.country',
             'stylers': [{
-              'visibility': 'off'
+              'visibility': 'on'
             }]
           }, {
             'featureType': 'administrative.province',
             'stylers': [{
-              'visibility': 'off'
+              'visibility': 'on'
             }]
           }, {
             'featureType': 'poi',
@@ -79,7 +81,7 @@
         // };
 
         // map ready broadcast load landlords
-        $scope.map.options.mapTypeId = googleMaps.MapTypeId.HYBRID;
+        $scope.map.options.mapTypeId = googleMaps.MapTypeId.ROADMAP;
         $rootScope.$broadcast('map:ready');
 
         //service call should return promise
@@ -108,7 +110,7 @@
         $scope.properties.push(marker);
       }
 
-      function populateMap(){
+      function populateMap() {
         propertyService.getProperties().then(function(data) {
           //console.log(data);
           angular.forEach(data, buildPropertyMarker);

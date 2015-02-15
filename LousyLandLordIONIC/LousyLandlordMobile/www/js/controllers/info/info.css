@@ -16,8 +16,10 @@
 
 .btn-close{
   font-size: 1em;
+  float: right;
 }
 
 .name{
-  padding-top: 10px;
+  display: table-cell;
+  vertical-align: middle;
 }

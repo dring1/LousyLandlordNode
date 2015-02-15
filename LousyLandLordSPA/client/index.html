@@ -13,6 +13,7 @@
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <link href='http://fonts.googleapis.com/css?family=Finger+Paint|Oregano' rel='stylesheet' type='text/css'>
   <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
   <!-- build:css(client) app/vendor.css -->
   <!-- bower:css -->
@@ -32,10 +33,13 @@
   <link rel="stylesheet" href="app/home/home.css">
   <link rel="stylesheet" href="app/info/info.css">
   <link rel="stylesheet" href="app/map/map.css">
+  <link rel="stylesheet" href="components/about/about.css">
   <link rel="stylesheet" href="components/address-search/addressSearch.css">
+  <link rel="stylesheet" href="components/brand/brand.css">
   <link rel="stylesheet" href="components/contact/contact.css">
   <link rel="stylesheet" href="components/donate/donate.css">
   <link rel="stylesheet" href="components/form/form.css">
+  <link rel="stylesheet" href="components/navbar/navbar.css">
   <link rel="stylesheet" href="components/toolbar/toolbar.css">
   <!-- endinjector -->
   <!-- endbuild -->
@@ -47,11 +51,13 @@
     <![endif]-->
 
   <!-- Add your site or application content here -->
+  <div ng-include="'components/navbar/navbar.html'"></div>
   <div ng-include="'app/home/home.html'"></div>
   <!--[if lt IE 9]>
     <script src="bower_components/es5-shim/es5-shim.js"></script>
     <script src="bower_components/json3/lib/json3.min.js"></script>
     <![endif]-->
+
   <!-- build:js({client,node_modules}) app/vendor.js -->
   <!-- bower:js -->
   <script src="bower_components/jquery/dist/jquery.js"></script>
@@ -62,7 +68,6 @@
   <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
   <script src="bower_components/lodash/dist/lodash.compat.js"></script>
   <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-  <script src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
   <script src="bower_components/restangular/dist/restangular.js"></script>
   <script src="bower_components/leaflet/dist/leaflet.js"></script>
   <script src="bower_components/leaflet/dist/leaflet-src.js"></script>
@@ -121,6 +126,7 @@
   <script src="components/propertyFilter/propertyFilter.js"></script>
   <!-- endinjector -->
   <!-- endbuild -->
+  <script src="lib/angular-google-maps/angular-google-maps.js"></script>
 </body>
 
 </html>

@@ -38,3 +38,11 @@
 .center{
   margin: 0 auto;
 }
+
+.brand{
+  /*font-size: 150%;*/
+  /*color: rgba(227, 122, 37, 0.87);*/
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px #000;
+  font-family: 'Finger Paint', cursive;
+}

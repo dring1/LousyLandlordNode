@@ -24,37 +24,39 @@ angular.module('LousyLandlordMobileApp')
         maxZoom: 20,
         minZoom: 3,
         styles: [{
-          'featureType': 'administrative.country',
-          'stylers': [{
-            'visibility': 'off'
-          }]
-        }, {
-          'featureType': 'administrative.province',
-          'stylers': [{
-            'visibility': 'off'
-          }]
-        }, {
-          'featureType': 'poi',
-          'stylers': [{
-            'visibility': 'off'
-          }]
-        }, {
-          'featureType': 'transit',
-          'stylers': [{
-            'visibility': 'off'
-          }]
-        }, {
-          'featureType': 'poi.park',
-          'elementType': 'geometry.fill',
-          'stylers': [{
-            'visibility': 'on'
-          }]
-        }, {
-          'featureType': 'landscape',
-          'stylers': [{
-            'visibility': 'simplified'
-          }]
-        }, ]
+              'featureType': 'administrative.country',
+              'stylers': [{
+                'visibility': 'on'
+              }]
+            }, {
+              'featureType': 'administrative.province',
+              'stylers': [{
+                'visibility': 'on'
+              }]
+            }, {
+              'featureType': 'poi',
+              'stylers': [{
+                'visibility': 'off'
+              }]
+            }, {
+              'featureType': 'transit',
+              'stylers': [{
+                'visibility': 'off'
+              }]
+            },
+            {
+              'featureType': 'poi.park',
+              'elementType': 'geometry.fill',
+              'stylers': [{
+                'visibility': 'on'
+              }]
+            }
+            , {
+              'featureType': 'landscape',
+              'stylers': [{
+                'visibility': 'simplified'
+              }]
+            }, ]
       },
       clusterOptions: {
           averageCenter: true,
@@ -76,7 +78,6 @@ angular.module('LousyLandlordMobileApp')
 
     $scope.markersEvents = {
       click: function(gMarker, eventName, model) {
-        console.log('pew');
         if (model.$id) {
           model = model.coords; //use scope portion then
         }

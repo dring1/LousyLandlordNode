@@ -2,11 +2,14 @@
 
 angular.module('lousyLandLordSpaApp')
   .factory('config', function () {
-    var baseURL = 'http://localhost:9015/';
+    var apiURL = 'http://localhost:9015/';
 
     return {
       getBaseURL: function () {
-        return baseURL;
+        return apiURL;
+      },
+      setBaseURL: function(url) {
+        apiURL = url;
       }
     };
   });
