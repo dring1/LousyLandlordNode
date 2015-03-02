@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('propertyService', function($http, $q, config) {
+  .factory('propertyService', function($http, $q, configService) {
 
     function getProperties(where) {
       var deferred = $q.defer();
-      $http.get(config.getBaseURL() + 'properties', {
+      $http.get(configService.getBaseURL() + 'properties', {
           params: {
             skip: 0,
             limit: 100,
@@ -20,7 +20,7 @@ angular.module('lousyLandLordSpaApp')
 
     function getProperty(id) {
       var deferred = $q.defer();
-      $http.get(config.getBaseURL() + 'property/' + id)
+      $http.get(configService.getBaseURL() + 'property/' + id)
         .then(function(property) {
           console.log(property);
           deferred.resolve(property.data);
@@ -30,7 +30,7 @@ angular.module('lousyLandLordSpaApp')
 
     function searchProperties(query) {
       var deferred = $q.defer();
-      $http.post(config.getBaseURL() + 'properties/search', {
+      $http.post(configService.getBaseURL() + 'properties/search', {
           where: query
         })
         .then(function(property) {
@@ -42,7 +42,7 @@ angular.module('lousyLandLordSpaApp')
 
     function submitProperty(property){
       var deferred = $q.defer();
-      $http.post(config.getBaseURL() + 'property', {property: property})
+      $http.post(configService.getBaseURL() + 'property', {property: property})
       .then(function(property) {
         console.log(property);
         deferred.resolve(property.data);

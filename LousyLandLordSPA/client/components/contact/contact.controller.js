@@ -1,7 +1,7 @@
 'use strict';
 
 
-angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($rootScope, $scope, $modal, $log, $http, config) {
+angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($rootScope, $scope, $modal, $log, $http, configService) {
 
   $scope.items = ['Comment', 'Concern', 'Wrongful Accusation'];
 
@@ -19,7 +19,7 @@ angular.module('lousyLandLordSpaApp').controller('ContactCtrl', function ($rootS
     });
 
     modalInstance.result.then(function (comment) {
-      $http.post(config.getBaseURL() + 'comments', comment)
+      $http.post(configService.getBaseURL() + 'comments', comment)
       .then(function() {
         console.log('submitted');
       })

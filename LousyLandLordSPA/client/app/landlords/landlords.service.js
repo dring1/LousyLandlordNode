@@ -1,20 +1,20 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp')
-  .factory('landlordService', function($http, $q, config) {
+  .factory('landlordService', function($http, $q, configService) {
     // Service logic
     // ...
 
 
     // function getLandlords() {
-    //   $http.get(config.getBaseURL() + 'landlords')
+    //   $http.get(configService.getBaseURL() + 'landlords')
     //     .then(function(landlords) {
     //     });
     // }
 
     function getLandlord(id) {
       var deferred = $q.defer();
-      $http.get(config.getBaseURL() + 'landlord/' + id)
+      $http.get(configService.getBaseURL() + 'landlord/' + id)
         .then(function(landlord) {
           deferred.resolve(landlord);
         })
@@ -26,7 +26,7 @@ angular.module('lousyLandLordSpaApp')
 
     function submitLandlord(landlord){
       var deferred = $q.defer();
-      $http.post(config.getBaseURL() + 'landlord', {landlord: landlord})
+      $http.post(configService.getBaseURL() + 'landlord', {landlord: landlord})
       .then(function(result) {
         console.log(result);
         deferred.resolve(result);

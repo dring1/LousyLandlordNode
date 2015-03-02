@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+  <title>Lousy Landlord</title>
+
+
+  <link href='http://fonts.googleapis.com/css?family=Finger+Paint|Oregano' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- build:css styles/vendor.css -->
+  <!-- <link rel="stylesheet" href="vendor/some.contrib.css"> -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="lib/ionic/css/ionic.css" />
+  <link rel="stylesheet" href="lib/angular-google-places-autocomplete/src/autocomplete.css" />
+  <link rel="stylesheet" href="lib/angular-google-places-autocomplete/dist/autocomplete.min.css" />
+  <!-- endbower -->
+
+  <!-- injector:css -->
+  <link rel="stylesheet" href="scripts/controllers/add-form/form.css">
+  <link rel="stylesheet" href="scripts/controllers/info/info.css">
+  <!-- endinjector -->
+  <!-- endbuild -->
+
+  <!-- build:css({.tmp,app}) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <!-- endbuild -->
+
+
+  <!-- build:js scripts/vendor.js -->
+  <!-- <script src="vendor/someContribJs.js"></script> -->
+  <!-- bower:js -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular-animate/angular-animate.js"></script>
+  <script src="lib/angular-sanitize/angular-sanitize.js"></script>
+  <script src="lib/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="lib/ionic/js/ionic.js"></script>
+  <script src="lib/ionic/js/ionic-angular.js"></script>
+  <script src="lib/angular-google-places-autocomplete/src/autocomplete.js"></script>
+  <script src="lib/angular-google-places-autocomplete/dist/autocomplete.min.js"></script>
+  <script src="lib/lodash/lodash.js"></script>
+  <script src="lib/angular-touch/angular-touch.js"></script>
+  <!-- endbower -->
+
+  <!-- injector:js -->
+  <script src="scripts/app.js"></script>
+  <script src="scripts/controllers/add-form/form.controller.js"></script>
+  <script src="scripts/controllers/info/info.controller.js"></script>
+  <script src="scripts/controllers/map/map.controller.js"></script>
+  <script src="scripts/controllers/search-controller/search.controller.js"></script>
+  <script src="scripts/custom/angular-google-maps/dist/angular-google-maps.js"></script>
+  <script src="scripts/services/config.service.js"></script>
+  <script src="scripts/services/landlord.service.js"></script>
+  <script src="scripts/services/property.service.js"></script>
+  <!-- endinjector -->
+  <!-- endbuild -->
+
+
+
+  <!-- cordova script (this will be a 404 during development) -->
+  <script src="cordova.js"></script>
+
+  <script src="//maps.googleapis.com/maps/api/js?libraries=places"></script>
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i['GoogleAnalyticsObject'] = r;
+      i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+      }, i[r].l = 1 * new Date();
+      a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-43223550-2', 'auto');
+    ga('send', 'pageview');
+  </script>
+</head>
+
+<body ng-app="LousyLandlordMobileApp">
+  <ionic-pane>
+    <div class="bar bar-header bar-positive">
+      <h1 class="title brand">Lousy Landlord <i class="icon ion-home"></i>
+      </h1>
+    </div>
+  </ionic-pane>
+  <ionic-content class="has-header">
+    <div class="address-search-bar" ng-include="'scripts/controllers/search-controller/address.search.html'"></div>
+    <div ng-include="'scripts/controllers/map/map.html'"></div>
+    <div ng-include="'scripts/controllers/info/infoM.html'"></div>
+    <div ng-include="'scripts/controllers/add-form/form.html'"></div>
+  </ionic-content>
+</body>
+
+</html>

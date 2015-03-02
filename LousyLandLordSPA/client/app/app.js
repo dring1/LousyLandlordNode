@@ -1,19 +1,22 @@
 'use strict';
 
 angular.module('lousyLandLordSpaApp', [
-  'ngResource',
-  'ui.select',
-  'ngSanitize',
-  'ui.router',
-  'ui.bootstrap',
-  'uiGmapgoogle-maps',
-  'google.places',
-  'schemaForm',
-  'angularModalService',
-])
-  .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    'ui.select',
+    'ngSanitize',
+    'ui.router',
+    'ui.bootstrap',
+    'uiGmapgoogle-maps',
+    'google.places',
+    'schemaForm',
+    'angularModalService',
+  ])
+  .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider
-      .otherwise('/home');
-    //  set up api end point
+      .otherwise('/');
     $locationProvider.html5Mode(true);
-  });
+  })
+  .run(function(configService) {
+    var location = window.location;
+    var url = (location.hostname.indexOf('lousylandlord') > -1) ? 'http://api.lousylandlord.ca/' : 'http://localhost:9015/'
+    configService.setBaseURL(url);
+  })

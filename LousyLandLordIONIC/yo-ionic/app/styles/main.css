@@ -1,0 +1,48 @@
+/* Empty. Add your own CSS if you like */
+.angular-google-map-container {
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.address-search-bar{
+  z-index: 3001;
+  position: absolute;
+  top: 44px;
+  width: 100vw;
+}
+
+.pac-container {
+  z-index: 1200 !important;
+}
+
+.property-info{
+  /*margin: 0 auto;*/
+  position: absolute;
+  bottom: 0;
+  /*width: 95vw;*/
+}
+
+.form-frame{
+  position: absolute;
+  top: 15vh;
+  height: 85vh;
+  width: 100%;
+  background-color: #a8c8e2;
+  opacity: 0.8;
+}
+
+.center{
+  margin: 0 auto;
+}
+
+.brand{
+  /*font-size: 150%;*/
+  /*color: rgba(227, 122, 37, 0.87);*/
+  font-weight: bolder;
+  text-shadow: 2px 2px 2px #000;
+  font-family: 'Finger Paint', cursive;
+}

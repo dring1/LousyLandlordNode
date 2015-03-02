@@ -8,11 +8,14 @@ angular.module('LousyLandlordMobileApp', [
 'google.places',
 'uiGmapgoogle-maps',
 'ngTouch',
-'ionic.contrib.ui.cards',
 'geolocation'
 ])
 
-.run(function($ionicPlatform) {
+.run(function($ionicPlatform, config) {
+
+  var location = window.location;
+  var url = (location.hostname.indexOf('lousylandlord') > -1) ? 'http://api.lousylandlord.ca/' : 'http://localhost:9015/'
+  config.setBaseURL(url);
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
