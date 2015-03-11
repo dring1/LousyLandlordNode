@@ -1,14 +1,27 @@
 <div ng-controller="SearchController">
   <div class="bar bar-header item-input-inset">
-    <label class="item-input-wrapper">
+    <label  ng-class="{noPlace: noPlace === true}" class="item-input-wrapper">
       <i class="icon ion-ios7-search placeholder-icon"></i>
-      <input type="text" g-places-autocomplete ng-model="place" forceSelection="true" options="autocompleteOptions" placeholder="Search for an address.." />
-      <button ng-show="addProperty" ng-click="add()" class="button button-clear">
+      <input id="g-places" focus-on="add:property:empty:form" type="text" g-places-autocomplete ng-model="place" forceSelection="true" options="autocompleteOptions" placeholder="Search for an address.." />
+      <!-- <button ng-show="addProperty" ng-click="add()" class="button button-clear">
         <i class="icon ion-plus-round"></i>
-      </button>
+      </button> -->
+      <span>
+        <button ng-show="addProperty" ng-click="clear()" class="button button-clear">
+          <i class="icon ion-ios-close-empty"></i>
+        </button>
+      </span>
     </label>
-    <button ng-click="clear()" class="button button-clear">
-      Cancel
-    </button>
+    <span>
+      <!-- <i class="icon ion-plus-round adjust-icon"></i> -->
+      <button ng-click="add()" class="button icon ion-ios-plus-empty button-clear">
+       Property
+      </button>
+    </span>
+    <!-- <span>
+      <button ng-click="clear()" class="button button-clear">
+        <i class="icon ion-close-round"></i>
+      </button>
+    </span> -->
   </div>
 </div>

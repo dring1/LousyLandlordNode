@@ -46,3 +46,11 @@
   text-shadow: 2px 2px 2px #000;
   font-family: 'Finger Paint', cursive;
 }
+
+button.ion-plus-round i:before{
+  font-size: 15px !important;
+}
+
+.noPlace {
+  background: rgba(240, 201, 201, 0.7)
+}
