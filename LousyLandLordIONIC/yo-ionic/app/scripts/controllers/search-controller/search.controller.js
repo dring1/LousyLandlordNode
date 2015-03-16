@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('LousyLandlordMobileApp')
-  .controller('SearchController', function($scope, $rootScope, $timeout) {
+  .controller('SearchController', function($scope, $rootScope) {
     $scope.place = null;
     $scope.noPlace = false;
     $scope.autocompleteOptions = {
@@ -12,7 +12,7 @@ angular.module('LousyLandlordMobileApp')
       types: ['geocode'],
       watchEnter: true,
       location: new google.maps.LatLng(45.4248, -75.6992),
-      radius: 700000
+      radius: 70000
     };
     $scope.addProperty = false;
 
@@ -23,6 +23,7 @@ angular.module('LousyLandlordMobileApp')
       if (!place.geometry) {
         return;
       }
+      // if
       $scope.addProperty = true;
       var loc = {
         lat: parseFloat(place.geometry.location.k),
@@ -34,12 +35,14 @@ angular.module('LousyLandlordMobileApp')
       // $rootScope.$broadcast('property:selected', place);
     });
 
-    $scope.clear = function() {
+    function clear() {
       $scope.place = null;
       $scope.addProperty = false;
 
       $rootScope.$broadcast('close');
-    };
+    }
+
+    $scope.clear = clear;
 
     $scope.add = function() {
       if (!$scope.place) {
@@ -49,4 +52,8 @@ angular.module('LousyLandlordMobileApp')
       $scope.noPlace = false;
       $rootScope.$broadcast('addProperty', $scope.place);
     };
+
+    $rootScope.$on('property:update', function() {
+      clear();
+    });
   });

@@ -89,6 +89,10 @@ angular.module('LousyLandlordMobileApp')
       closePanels();
     });
 
+    $rootScope.$on('addProperty', function() {
+      $scope.frame = false;
+    });
+
     $scope.hide = function(panel){
       switch(panel){
         case 'propertyPanel':
