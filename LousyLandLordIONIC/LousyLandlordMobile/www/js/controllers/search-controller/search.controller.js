@@ -17,8 +17,8 @@ angular.module('LousyLandlordMobileApp')
     if(!place.geometry) { return; }
     $scope.addProperty = true;
     var loc = {
-      lat: parseFloat(place.geometry.location.k),
-      lng: parseFloat(place.geometry.location.D)
+      lat: parseFloat(place.geometry.location.A),
+      lng: parseFloat(place.geometry.location.F)
     };
     // zoom to location
     $rootScope.$broadcast('map:zoom', loc);

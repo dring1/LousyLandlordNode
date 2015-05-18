@@ -124,7 +124,12 @@ angular.module('lousyLandLordSpaApp')
         $scope.open({title: 'Invalid Address', message: 'We rely on Google Maps to find the address, and Google is unable to find it.'});
         return;
       }
+      
+      $scope.newLandlord.latitude = $scope.place.geometry.location.A;
+      $scope.newLandlord.longitude = $scope.place.geometry.location.A;
       $scope.newLandlord.location = $scope.place.formatted_address;
+      console.log($scope.place.formatted_address);
+      console.log($scope.newLandlord);
       propertyService.submitProperty($scope.newLandlord)
       .then(function(data) {
         $scope.newLandlord = {};

@@ -18,7 +18,6 @@
           streetViewControl: true,
           mapTypeControl: false,
           mapTypeControlOptions: false,
-          panControl: true,
           maxZoom: 20,
           minZoom: 3,
           styles: [{

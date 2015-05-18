@@ -19,10 +19,11 @@ angular.module('lousyLandLordSpaApp')
     if(!place) { return; }
     if(!place.geometry) { return; }
     var loc = {
-      lat: parseFloat(place.geometry.location.k),
-      lng: parseFloat(place.geometry.location.D)
+      lat: parseFloat(place.geometry.location.A),
+      lng: parseFloat(place.geometry.location.F)
     };
     // zoom to location
+    console.log(place.geometry);
     $rootScope.$broadcast('map:zoom', loc);
 
     $rootScope.$broadcast('property:selected', place);
