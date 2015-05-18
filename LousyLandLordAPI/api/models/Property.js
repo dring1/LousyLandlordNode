@@ -110,9 +110,11 @@ module.exports = {
     // var address = [values.location.address, values.location.city,
     //   values.location.province, values.location.country, values.location.postalCode
     // ].join(', ');
+    // if(values.longitude !== undefined || values.latitude)
     geocoder.geocode(values.location, function(err, geo) {
       if (err) return cb(err);
       var loc = geo[0]
+      console.log(geo);
       values.longitude = loc.longitude;
       values.latitude = loc.latitude;
       cb();
