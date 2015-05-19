@@ -53,17 +53,5 @@ module.exports = {
       required: false,
       point: true
     }
-  },
-
-  beforeCreate: function(values, cb) {
-    geocoder.geocode(values.location, function(err, geo) {
-      if (err) return cb(err);
-      console.log(values);
-      var loc = geo[0]
-
-      values.longitude = loc.longitude;
-      values.latitude = loc.latitude;
-      cb();
-    });
   }
 };
