@@ -124,7 +124,7 @@ angular.module('lousyLandLordSpaApp')
         $scope.open({title: 'Invalid Address', message: 'We rely on Google Maps to find the address, and Google is unable to find it.'});
         return;
       }
-      
+
       $scope.newLandlord.latitude = $scope.place.geometry.location.A;
       $scope.newLandlord.longitude = $scope.place.geometry.location.F;
       $scope.newLandlord.location = $scope.place.formatted_address;
@@ -140,8 +140,11 @@ angular.module('lousyLandLordSpaApp')
         $rootScope.$broadcast('property:create');
       })
       .catch(function(err) {
-        $scope.err = err;
-        $scope.open({title: 'Something went wrong', message: err});
+        console.log(err);
+        // $scope.err = err;
+        var errMsg = 'Something broke on our side please try again later or contact us!';
+        if (err.data.message.raw.code === 11000) errMsg = 'This location has already been submitted!';
+        $scope.open({title: 'Something went wrong', message: errMsg});
         $scope.error = true;
       });
     };

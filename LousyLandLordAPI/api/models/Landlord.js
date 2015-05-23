@@ -16,7 +16,7 @@ module.exports = {
     },
     organization: {
       type: 'string',
-      required: 'false'
+      required: false
     },
     city: {
       required: false,

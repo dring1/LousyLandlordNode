@@ -9,7 +9,6 @@ angular.module('LousyLandlordMobileApp')
     function getLandlords() {
       $http.get(config.getBaseURL() + 'landlords')
         .then(function(landlords) {
-          console.log(landlords);
         });
     }
 

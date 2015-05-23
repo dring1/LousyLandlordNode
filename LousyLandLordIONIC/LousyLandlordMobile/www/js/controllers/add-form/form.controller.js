@@ -94,7 +94,6 @@ angular.module('LousyLandlordMobileApp')
     }
 
     $scope.cancel = function() {
-      console.log('why do I suck');
       $scope.frame = false;
     }
 

@@ -18,7 +18,6 @@ angular.module('LousyLandlordMobileApp')
         });
       $q.all([landlordPromise, propertyPromise])
         .then(function(data) {
-          console.log('data', data[0], data[1]);
           $scope.landlord = data[0].data;
           $scope.properties = data[1].data;
           $scope.propertyPanel = true;
@@ -46,7 +45,6 @@ angular.module('LousyLandlordMobileApp')
 
 
     function closePanels() {
-      console.log('closing');
       $scope.propertyPanel = false;
       $scope.landlordPanel = false;
       $scope.cards = [];

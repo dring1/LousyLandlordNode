@@ -64,7 +64,6 @@ angular.module('LousyLandlordMobileApp')
         },
       events: {
         click: function () {
-          console.log('called');
           $rootScope.$broadcast('panel:close');
         }
       },
@@ -72,9 +71,6 @@ angular.module('LousyLandlordMobileApp')
 
     $scope.showWeather = false;
 
-    $scope.selectProperty = function() {
-      console.log('called');
-    }
 
     $scope.markersEvents = {
       click: function(gMarker, eventName, model) {
@@ -123,7 +119,6 @@ angular.module('LousyLandlordMobileApp')
 
     function populateMap(){
       propertyService.getProperties().then(function(data) {
-        console.log(data);
         angular.forEach(data, buildPropertyMarker);
 
       });
@@ -135,7 +130,6 @@ angular.module('LousyLandlordMobileApp')
     });
 
     $rootScope.$on('property:update', function(event, property) {
-      console.log(property);
       buildPropertyMarker(property);
     });
 
