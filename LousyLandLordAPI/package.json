@@ -36,6 +36,7 @@
     "sails": "~0.11.0",
     "sails-disk": "~0.10.7",
     "sails-generate-auth": "^0.2.0",
+    "sails-mongo": "^0.11.2",
     "sendgrid": "^1.6.0",
     "should": "^5.0.1",
     "super": "^0.2.3",
