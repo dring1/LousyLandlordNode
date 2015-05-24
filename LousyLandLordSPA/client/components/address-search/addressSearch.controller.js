@@ -23,9 +23,7 @@ angular.module('lousyLandLordSpaApp')
       lng: parseFloat(place.geometry.location.F)
     };
     // zoom to location
-    console.log(place.geometry);
     $rootScope.$broadcast('map:zoom', loc);
-
     $rootScope.$broadcast('property:selected', place);
   });
 

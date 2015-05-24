@@ -10,7 +10,6 @@ angular.module('lousyLandLordSpaApp')
     $scope.addLandlordDisabled = true;
 
     $rootScope.$on('property:selected', function(event, place) {
-      console.log(place);
       $scope.addLandlordDisabled = false;
       $scope.place = place;
     });
